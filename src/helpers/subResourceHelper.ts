@@ -14,8 +14,11 @@ export const loadScript = (pageName: string): string => {
   const entryPoint = `${LIB_ENTRY_POINT}/${pageName}.ts`;
 
   const manifest = loadManifest();
+
   const outputPath = manifest[entryPoint];
+
   const splitOutputPath = outputPath.split("/");
   const hashedEntryPointName = splitOutputPath[splitOutputPath.length - 1];
+
   return `/lib/${hashedEntryPointName}`;
 };
