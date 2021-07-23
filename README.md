@@ -40,4 +40,3 @@ src
      |--post.md
      |--post.ts ... jsでデータを記述する
 ```
-
