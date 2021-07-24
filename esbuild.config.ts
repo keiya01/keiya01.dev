@@ -2,7 +2,7 @@ import { build, BuildOptions } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
 import { copy } from "cpx";
 
-import { getPagePathname } from "./build/esbuild/path";
+import { getEntryPathname } from "./build/esbuild/path";
 import { generateManifest } from "./build/esbuild/manifest";
 
 const outputRoot = "./dist";
@@ -10,7 +10,10 @@ const outputRoot = "./dist";
 const run = async () => {
   const libOptions: BuildOptions = {
     format: "esm",
-    entryPoints: await getPagePathname("./src/lib"),
+    entryPoints: await Promise.all([
+      getEntryPathname("./src/lib/pages"),
+      getEntryPathname("./src/lib/features"),
+    ]).then((res) => res.flat()),
     entryNames: "[name].[hash]",
     outdir: `${outputRoot}/site/lib`,
     metafile: true,
@@ -21,7 +24,7 @@ const run = async () => {
 
   const layoutOptions: BuildOptions = {
     format: "cjs",
-    entryPoints: await getPagePathname("./src/layouts"),
+    entryPoints: await getEntryPathname("./src/layouts/pages"),
     entryNames: "[name].[hash].11ty",
     outdir: `${outputRoot}/layouts`,
     platform: "node",
