@@ -1,43 +1,41 @@
-import { build, BuildOptions, Metafile } from "esbuild";
-import { writeFile } from "fs/promises";
+import { build, BuildOptions } from "esbuild";
+import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
+import { copy } from "cpx";
 
 import { getPagePathname } from "./build/esbuild/path";
+import { generateManifest } from "./build/esbuild/manifest";
 
 const outputRoot = "./dist";
-
-const generateManifest = async (metafile: Metafile | undefined) => {
-  const manifest: Record<string, string> = {};
-  Object.entries(metafile?.outputs || {}).map(
-    ([hashedEntryPoint, { entryPoint }]) => {
-      if (entryPoint) {
-        manifest[entryPoint] = hashedEntryPoint;
-      }
-    }
-  );
-  await writeFile(`${outputRoot}/manifest.json`, JSON.stringify(manifest));
-};
 
 const run = async () => {
   const libOptions: BuildOptions = {
     format: "esm",
     entryPoints: await getPagePathname("./src/lib"),
-    entryNames: "[name]-[hash]",
+    entryNames: "[name].[hash]",
     outdir: `${outputRoot}/site/lib`,
     metafile: true,
     minify: true,
     bundle: true,
   };
-  build(libOptions).then(async ({ metafile }) => generateManifest(metafile));
+  const { metafile: metafileForLib } = await build(libOptions);
 
   const layoutOptions: BuildOptions = {
     format: "cjs",
     entryPoints: await getPagePathname("./src/layouts"),
+    entryNames: "[name].[hash].11ty",
     outdir: `${outputRoot}/layouts`,
     platform: "node",
-    minify: false,
+    metafile: true,
+    minify: true,
     bundle: true,
+    plugins: [vanillaExtractPlugin()],
   };
-  build(layoutOptions);
+  const { metafile: metafileForLayout } = await build(layoutOptions);
+
+  await generateManifest({ outputRoot }, metafileForLayout, metafileForLib);
+
+  // copy extracted css to serve css from `site` directory
+  copy("./dist/layouts/*.css", "./dist/site/layouts");
 };
 
 run();
