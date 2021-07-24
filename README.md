@@ -26,7 +26,7 @@ src
    |--features ... 計測スクリプトなど
      |--blog
      |--webVitals.ts
-   |--entries ... ページごとのエントリーポイントを記述し、ここで必要なデータを読み込む
+   |--entries ... ページごとのエントリーポイントを記述し、ここで必要なデータを読み込む。主にWeb Components。
      |--blog
      |--top
  |--assets
