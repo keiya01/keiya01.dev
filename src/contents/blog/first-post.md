@@ -2,6 +2,8 @@
 layout: blog
 title: First Post
 date: Last Modified
+features:
+  - webVitals
 ---
 
 ## Hello World
