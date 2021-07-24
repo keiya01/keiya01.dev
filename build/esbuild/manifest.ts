@@ -33,12 +33,14 @@ export const generateManifest = async (
           return;
         }
 
-        const splitPath = formattedEntryPoint.split("/");
+        const isLayoutPages =
+          formattedEntryPoint.startsWith("src/layouts/pages") ||
+          formattedEntryPoint.startsWith("src/layouts/partials");
+
         const moduleName = (
-          formattedEntryPoint.startsWith("src/layouts/pages")
-            ? splitPath[2]
-            : splitPath[1]
+          isLayoutPages ? "pages" : formattedEntryPoint.split("/")[1]
         ) as manifest.AcceptableModuleNames;
+
         if (
           !AcceptableModuleNames.includes(
             moduleName as manifest.AcceptableModuleNames
