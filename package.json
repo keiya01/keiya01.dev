@@ -39,6 +39,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "common-tags": "^1.8.0"
+    "common-tags": "^1.8.0",
+    "web-vitals": "^2.1.0"
   }
 }
