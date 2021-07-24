@@ -7,13 +7,17 @@ import { generateManifest } from "./build/esbuild/manifest";
 
 const outputRoot = "./dist";
 
+const promiseAllFlat = async <T extends unknown>(
+  promises: Promise<T[]>[]
+): Promise<T[]> => await Promise.all(promises).then((res) => res.flat());
+
 const run = async () => {
   const libOptions: BuildOptions = {
     format: "esm",
-    entryPoints: await Promise.all([
+    entryPoints: await promiseAllFlat([
       getEntryPathname("./src/lib/pages"),
       getEntryPathname("./src/lib/features"),
-    ]).then((res) => res.flat()),
+    ]),
     entryNames: "[name].[hash]",
     outdir: `${outputRoot}/site/lib`,
     metafile: true,
@@ -24,7 +28,10 @@ const run = async () => {
 
   const layoutOptions: BuildOptions = {
     format: "cjs",
-    entryPoints: await getEntryPathname("./src/layouts/pages"),
+    entryPoints: await promiseAllFlat([
+      getEntryPathname("./src/layouts/pages"),
+      getEntryPathname("./src/layouts/partials"),
+    ]),
     entryNames: "[name].[hash].11ty",
     outdir: `${outputRoot}/layouts`,
     platform: "node",
