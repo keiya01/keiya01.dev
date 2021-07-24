@@ -1,5 +1,13 @@
 import { globalStyle } from "@vanilla-extract/css";
 
+globalStyle("body", {
+  margin: 0,
+  minHeight: "100%",
+  height: "100%",
+  width: "100%",
+  backgroundColor: "#280042",
+});
+
 globalStyle("h1, h2, h3, h4", {
   color: "#fff",
   padding: "0 0 6px",
