@@ -2,7 +2,8 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import {
   LAYOUT_ENTRY_POINT,
-  LIB_ENTRY_POINT,
+  LIB_FEATURE_ENTRY_POINT,
+  LIB_PAGE_ENTRY_POINT,
   OUTPUT_DIST_DIR,
 } from "../constants/foundation";
 
@@ -23,36 +24,44 @@ export const loadManifest = (): manifest.Manifest => {
   return Manifest;
 };
 
-export const loadScript = (pageName: string): string => {
-  const entryPoint = `${LIB_ENTRY_POINT}/${pageName}.ts`;
-
+const getOutputPath = (
+  moduleName: manifest.AcceptableModuleNames,
+  entryPoint: string
+): string | undefined => {
   const manifest = loadManifest();
 
-  const outputPath = manifest.lib?.[entryPoint];
-
-  if (outputPath) {
-    const splitOutputPath = outputPath.split("/");
-    const hashedEntryPointName = splitOutputPath[splitOutputPath.length - 1];
-
-    return `/lib/${hashedEntryPointName}`;
+  const outputPath = manifest[moduleName]?.[entryPoint];
+  if (!outputPath) {
+    return;
   }
 
-  throw new Error(`Could not found ${pageName} script`);
+  const splitOutputPath = outputPath.split("/");
+  const hashedEntryPointName = splitOutputPath[splitOutputPath.length - 1];
+
+  return `/${moduleName}/${hashedEntryPointName}`;
+};
+
+export const loadPageScript = (pageName: string): string | undefined => {
+  const entryPoint = `${LIB_PAGE_ENTRY_POINT}/${pageName}.ts`;
+  return getOutputPath("lib", entryPoint);
+};
+
+export const loadFeatureScript = (pageName: string): string => {
+  const entryPoint = `${LIB_FEATURE_ENTRY_POINT}/${pageName}.ts`;
+
+  const outputPath = getOutputPath("lib", entryPoint);
+  if (!outputPath) {
+    throw new Error(`Could not found ${pageName} feature script`);
+  }
+  return outputPath;
 };
 
 export const loadStyle = (pageName: string): string => {
   const entryPoint = `${LAYOUT_ENTRY_POINT}/${pageName}.css`;
 
-  const manifest = loadManifest();
-
-  const outputPath = manifest.layouts?.[entryPoint];
-
-  if (outputPath) {
-    const splitOutputPath = outputPath.split("/");
-    const hashedEntryPointName = splitOutputPath[splitOutputPath.length - 1];
-
-    return `/layouts/${hashedEntryPointName}`;
+  const outputPath = getOutputPath("layouts", entryPoint);
+  if (!outputPath) {
+    throw new Error(`Could not found ${pageName} style`);
   }
-
-  throw new Error(`Could not found ${pageName} style`);
+  return outputPath;
 };
