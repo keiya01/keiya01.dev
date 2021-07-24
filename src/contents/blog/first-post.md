@@ -1,11 +1,13 @@
 ---
-layout: blog.11ty.js
+layout: blog
 title: First Post
 date: Last Modified
-scriptNames:
-  - blog
 ---
 
 ## Hello World
 
 hello my first content.
+
+## Hello
+
+hello
