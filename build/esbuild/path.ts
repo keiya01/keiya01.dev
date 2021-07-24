@@ -12,10 +12,13 @@ export const getPagePathname = async (root: string): Promise<string[]> => {
           await setPagePathname(fullPath);
           return;
         }
+        if (fullPath.endsWith(".css.ts")) {
+          return;
+        }
         pages.push(fullPath);
       })
     );
   };
-  await setPagePathname(root);
+  await setPagePathname(`${root}/pages`);
   return pages;
 };
