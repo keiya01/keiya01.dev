@@ -5,12 +5,12 @@
 ```
 src
  |--layouts ... レイアウトの基本となるテンプレートを入れる
+   |--partial ... ページの一部分となるものを入れる(テンプレート)
+     |--global.ts ... gobalなHeadやHeader、Footerなど
+     |--global.css
    |--pages ... page名ごとに区切る
      |--top.ts ... `components/pages/`を呼び出すだけ。ここでpageに必要なグローバルなJSやCSSを読み込む。
      |--home.ts
-   |--global.ts ... gobalなHeadやHeader、Footerなど
-   |--global.css
-   |--index.ts
  |--components ... 各UIのコンポーネントを入れる
    |--blog
      |--ListItem.ts
