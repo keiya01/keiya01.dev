@@ -22,9 +22,13 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@types/common-tags": "^1.8.1",
+    "@types/cpx": "^1.5.2",
     "@types/node": "^16.4.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
+    "@vanilla-extract/css": "^1.1.2",
+    "@vanilla-extract/esbuild-plugin": "^1.1.0",
+    "cpx": "^1.5.0",
     "esbuild": "^0.12.15",
     "esbuild-register": "^2.6.0",
     "eslint": "^7.31.0",
