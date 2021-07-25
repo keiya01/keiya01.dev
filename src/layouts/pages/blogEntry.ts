@@ -19,7 +19,7 @@ export const render = ({
 }: EleventyProps): string => {
   return html`
     <article>
-      <header class="${style.articleHeader}">
+      <header>
         <h1 class="${style.title}">${title}</h1>
         <time datetime="${page.date}">${getFormattedDate(page.date)}</time>
         <div class="${style.tagList}">${TagList({ tags })}</div>

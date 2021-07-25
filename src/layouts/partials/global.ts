@@ -6,6 +6,7 @@ import {
   loadStyle,
 } from "../../helpers/subResourceHelper";
 import { EleventyProps } from "../../types/eleventy";
+import { Header } from "../components/global/Header";
 
 import "../partials/global.css";
 
@@ -20,7 +21,7 @@ export const render = ({
   const pageScript = loadPageScript(layout);
 
   return html`<!DOCTYPE html>
-    <html>
+    <html lang="ja">
       <head>
         <title>${title || "blog - Keiya Sasaki"}</title>
         <meta
@@ -43,6 +44,7 @@ export const render = ({
         )}
       </head>
       <body>
+        ${Header()}
         <main>${content}</main>
       </body>
     </html>`;

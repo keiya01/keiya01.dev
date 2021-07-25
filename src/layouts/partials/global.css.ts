@@ -24,7 +24,7 @@ globalStyle("body", {
 globalStyle("main", {
   display: "flex",
   flexDirection: "column",
-  maxWidth: 680,
+  maxWidth: vars.content_width,
   width: "100%",
   margin: "50px auto 100px",
   padding: "0 20px",
