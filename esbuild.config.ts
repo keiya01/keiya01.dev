@@ -46,6 +46,9 @@ const run = async () => {
 
   // copy extracted css to serve css from `site` directory
   copy("./dist/layouts/*.css", "./dist/site/layouts");
+
+  // copy public resource to dist
+  copy("./public/**/*", "./dist/site/public");
 };
 
 run();
