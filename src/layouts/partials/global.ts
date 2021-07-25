@@ -15,13 +15,19 @@ export const render = ({
   features,
   content,
   publics,
+  description,
 }: EleventyProps): string => {
   const pageScript = loadPageScript(layout);
 
   return html`<!DOCTYPE html>
     <html>
       <head>
-        <title>${title}</title>
+        <title>${title || "blog - Keiya Sasaki"}</title>
+        <meta
+          name="description"
+          content="${description ||
+          "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸"}"
+        />
         <meta name="color-scheme" content="dark light" />
         <link rel="stylesheet" href="${loadStyle("global")}" />
         <link rel="stylesheet" href="${loadStyle(layout)}" />

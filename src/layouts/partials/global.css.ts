@@ -21,6 +21,16 @@ globalStyle("body", {
   backgroundColor: vars.background_base,
 });
 
+globalStyle("main", {
+  display: "flex",
+  flexDirection: "column",
+  maxWidth: 680,
+  width: "100%",
+  margin: "50px auto 100px",
+  padding: "0 20px",
+  boxSizing: "border-box",
+});
+
 globalStyle("h2, h3, h4", {
   margin: "50px 0 30px",
   width: "100%",
@@ -58,6 +68,7 @@ globalStyle("pre, code", {
 globalStyle("pre", {
   padding: 10,
   borderRadius: 5,
+  overflow: "auto",
 });
 
 globalStyle("code", {
