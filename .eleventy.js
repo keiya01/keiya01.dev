@@ -27,7 +27,6 @@ const useMarkdown = () => {
     },
   };
   return markdownIt(options).use(anchor, {
-    tabIndex: 0,
     permalink: anchor.permalink.headerLink(),
   });
 };
