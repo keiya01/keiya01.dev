@@ -1,4 +1,8 @@
 import { html } from "common-tags";
+import {
+  PROFILE_GITHUB_URL,
+  PROFILE_TWITTER_URL,
+} from "../../../constants/profile";
 
 import * as style from "./Header.css";
 import { LinkIcon } from "./LinkIcon";
@@ -14,14 +18,14 @@ export const Header = ({
 }: Props = {}): string => {
   const icons = [
     LinkIcon({
-      href: "https://github.com/keiya01",
+      href: PROFILE_GITHUB_URL,
       src: "png/github.png",
       alt: "Github",
       width: 25,
       height: 25,
     }),
     LinkIcon({
-      href: "https://twitter.com/_keiya01",
+      href: PROFILE_TWITTER_URL,
       src: "svg/twitter.svg",
       alt: "Twitter",
       width: 25,
