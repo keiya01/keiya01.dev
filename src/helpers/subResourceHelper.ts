@@ -65,3 +65,7 @@ export const loadStyle = (pageName: string): string => {
   }
   return outputPath;
 };
+
+export const loadPublicResource = (filename: string): string => {
+  return `/public/${filename}`;
+};
