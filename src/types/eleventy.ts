@@ -7,8 +7,10 @@ export type EleventyProps = {
   content: string;
   page: PageData;
   layout: string;
-  features: string[];
+  features?: string[];
   pageName: string;
+  publics?: string[];
+  tags?: string[];
 };
 
 export type EleventyData = Partial<EleventyProps>;

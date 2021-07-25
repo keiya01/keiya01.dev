@@ -2,6 +2,7 @@ import { html } from "common-tags";
 import {
   loadFeatureScript,
   loadPageScript,
+  loadPublicResource,
   loadStyle,
 } from "../../helpers/subResourceHelper";
 import { EleventyProps } from "../../types/eleventy";
@@ -13,6 +14,7 @@ export const render = ({
   title,
   features,
   content,
+  publics,
 }: EleventyProps): string => {
   const pageScript = loadPageScript(layout);
 
@@ -20,8 +22,13 @@ export const render = ({
     <html>
       <head>
         <title>${title}</title>
+        <meta name="color-scheme" content="dark light" />
         <link rel="stylesheet" href="${loadStyle("global")}" />
         <link rel="stylesheet" href="${loadStyle(layout)}" />
+        ${publics?.map(
+          (path) =>
+            html`<link rel="stylesheet" href="${loadPublicResource(path)}" />`
+        )}
         ${pageScript &&
         html`<script type="module" src="${pageScript}"></script>`}
         ${features?.map(
