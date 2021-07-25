@@ -8,7 +8,7 @@ import {
 import { EleventyProps } from "../../types/eleventy";
 import { Header } from "../components/global/Header";
 
-import "../partials/global.css";
+import * as style from "../partials/global.css";
 
 export const render = ({
   layout,
@@ -45,7 +45,7 @@ export const render = ({
       </head>
       <body>
         ${Header()}
-        <main>${content}</main>
+        <div class="${style.wrapper}">${content}</div>
       </body>
     </html>`;
 };

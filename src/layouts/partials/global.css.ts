@@ -1,4 +1,4 @@
-import { assignVars, globalStyle } from "@vanilla-extract/css";
+import { assignVars, globalStyle, style } from "@vanilla-extract/css";
 import { darkVars, lightVars, vars } from "./theme.css";
 
 globalStyle("html", {
@@ -6,9 +6,14 @@ globalStyle("html", {
   lineHeight: 1.8,
   fontSize: 16,
   color: vars.color_base,
+  scrollBehavior: "smooth",
+  fontFamily: `"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;`,
   "@media": {
     "(prefers-color-scheme: light)": {
       vars: assignVars(vars, lightVars),
+    },
+    "(prefers-reduced-motion: reduce)": {
+      scrollBehavior: "auto",
     },
   },
 });
@@ -27,7 +32,6 @@ globalStyle("main", {
   maxWidth: vars.content_width,
   width: "100%",
   margin: "50px auto 100px",
-  padding: "0 20px",
   boxSizing: "border-box",
 });
 
@@ -94,4 +98,22 @@ globalStyle("a", {
 globalStyle("p, time, span", {
   padding: 0,
   margin: 0,
+});
+
+globalStyle(":is(a, button):focus-visible", {
+  outline: `3px solid ${vars.outline_color}`,
+  outlineOffset: -3,
+});
+
+globalStyle(":is(a, button):focus:not(focus-visible)", {
+  outline: `3px solid ${vars.outline_color}`,
+  outlineOffset: -3,
+});
+
+globalStyle(":is(a, button):focus", {
+  outline: "none",
+});
+
+export const wrapper = style({
+  margin: "0 20px",
 });
