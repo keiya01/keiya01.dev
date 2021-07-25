@@ -37,7 +37,7 @@ export const render = ({
         )}
       </head>
       <body>
-        ${content}
+        <main>${content}</main>
       </body>
     </html>`;
 };

@@ -1,5 +1,5 @@
 ---
-layout: blog
+layout: blogEntry
 title: 11ty + esbuild で超速 Jamstack
 date: 2021-07-25
 tags:
