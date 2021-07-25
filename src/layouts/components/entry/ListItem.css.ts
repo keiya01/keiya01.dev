@@ -33,10 +33,21 @@ export const titleLink = style({
 export const description = style({
   fontSize: 16,
   lineHeight: 1.5,
-  padding: "5px 0 20px",
+  padding: "5px 0",
 });
 
-export const tagList = style({});
+export const footer = style({
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  flexWrap: "wrap",
+});
+
+export const tabList = style({
+  display: "flex",
+  flex: 1,
+  width: "100%",
+});
 
 export const date = style({
   fontSize: 15,

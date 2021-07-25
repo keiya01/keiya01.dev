@@ -22,14 +22,18 @@ export const ListItem = ({
   return html`
     <li class="${style.item}">
       <article>
-        <h3 class="${style.title}">
-          <a href="${url}" class="${style.titleLink}">${title}</a>
-        </h3>
-        <p class="${style.description}">${description}</p>
-        <div class="${style.tagList}">${TagList({ tags })}</div>
-        <time datetime="${date}" class="${style.date}"
-          >${getFormattedDate(date)}</time
-        >
+        <header>
+          <h3 class="${style.title}">
+            <a href="${url}" class="${style.titleLink}">${title}</a>
+          </h3>
+          <p class="${style.description}">${description}</p>
+        </header>
+        <footer class="${style.footer}">
+          <div class="${style.tabList}">${TagList({ tags })}</div>
+          <time datetime="${date}" class="${style.date}"
+            >${getFormattedDate(date)}</time
+          >
+        </footer>
       </article>
     </li>
   `;
