@@ -18,13 +18,15 @@ export const render = ({
   tags,
 }: EleventyProps): string => {
   return html`
-    <article>
-      <header>
-        <h1 class="${style.title}">${title}</h1>
-        <time datetime="${page.date}">${getFormattedDate(page.date)}</time>
-        <div class="${style.tagList}">${TagList({ tags })}</div>
-      </header>
-      <section>${content}</section>
-    </article>
+    <main>
+      <article>
+        <header>
+          <h1 class="${style.title}">${title}</h1>
+          <time datetime="${page.date}">${getFormattedDate(page.date)}</time>
+          <div class="${style.tagList}">${TagList({ tags })}</div>
+        </header>
+        <section>${content}</section>
+      </article>
+    </main>
   `;
 };
