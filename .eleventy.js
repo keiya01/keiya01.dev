@@ -14,6 +14,24 @@ const loadPages = () => {
   return _Pages;
 };
 
+const useMarkdown = () => {
+  const markdownIt = require("markdown-it");
+  const prism = require("prismjs");
+  const anchor = require("markdown-it-anchor");
+
+  const options = {
+    html: true,
+    breaks: true,
+    highlight: (str, lang) => {
+      return prism.highlight(str.trim(), prism.languages[lang], lang);
+    },
+  };
+  return markdownIt(options).use(anchor, {
+    tabIndex: 0,
+    permalink: anchor.permalink.headerLink(),
+  });
+};
+
 module.exports = function (config) {
   config.addPassthroughCopy({ public: "./" });
 
@@ -27,6 +45,8 @@ module.exports = function (config) {
     const name = filename.split(".")[0];
     config.addLayoutAlias(name, filename);
   });
+
+  config.setLibrary("md", useMarkdown());
 
   return {
     templateFormats: ["md"],
