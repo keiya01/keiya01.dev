@@ -100,17 +100,12 @@ globalStyle("p, time, span", {
   margin: 0,
 });
 
-globalStyle(":is(a, button):focus-visible", {
-  outline: `3px solid ${vars.outline_color}`,
-  outlineOffset: -3,
-});
-
-globalStyle(":is(a, button):focus:not(focus-visible)", {
-  outline: `3px solid ${vars.outline_color}`,
-  outlineOffset: -3,
-});
-
 globalStyle(":is(a, button):focus", {
+  outline: `3px solid ${vars.outline_color}`,
+  outlineOffset: -3,
+});
+
+globalStyle(":is(a, button):focus:not(:focus-visible)", {
   outline: "none",
 });
 
