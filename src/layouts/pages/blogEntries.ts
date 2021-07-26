@@ -25,8 +25,9 @@ export const render = ({ collections, tag }: EleventyProps): string => {
             rel="noopener noreferrer"
             href="${PROFILE_TWITTER_URL}"
             class="${style.profileName}"
-            >Keiya Sasaki</a
           >
+            Keiya Sasaki
+          </a>
         </div>
       </div>
     </aside>
