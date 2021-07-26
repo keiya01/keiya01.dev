@@ -7,6 +7,9 @@ import { generateManifest } from "./build/esbuild/manifest";
 
 const outputRoot = "./dist";
 
+const isProduction = process.env.NODE_ENV === "production";
+const shouldWatch = process.env.ESBUILD_SHOULD_WATCH === "true";
+
 const promiseAllFlat = async <T extends unknown>(
   promises: Promise<T[]>[]
 ): Promise<T[]> => await Promise.all(promises).then((res) => res.flat());
@@ -18,11 +21,12 @@ const run = async () => {
       getEntryPathname("./src/lib/pages"),
       getEntryPathname("./src/lib/features"),
     ]),
-    entryNames: "[name].[hash]",
+    entryNames: isProduction ? "[name].[hash]" : undefined,
     outdir: `${outputRoot}/site/lib`,
     metafile: true,
     minify: true,
     bundle: true,
+    watch: shouldWatch,
   };
   const { metafile: metafileForLib } = await build(libOptions);
 
@@ -32,12 +36,13 @@ const run = async () => {
       getEntryPathname("./src/layouts/pages"),
       getEntryPathname("./src/layouts/partials"),
     ]),
-    entryNames: "[name].[hash].11ty",
+    entryNames: isProduction ? "[name].[hash].11ty" : "[name].11ty",
     outdir: `${outputRoot}/layouts`,
     platform: "node",
     metafile: true,
     minify: true,
     bundle: true,
+    watch: shouldWatch,
     plugins: [vanillaExtractPlugin()],
   };
   const { metafile: metafileForLayout } = await build(layoutOptions);
@@ -46,9 +51,6 @@ const run = async () => {
 
   // copy extracted css to serve css from `site` directory
   copy("./dist/layouts/*.css", "./dist/site/layouts");
-
-  // copy public resource to dist
-  copy("./public/**/*", "./dist/site/public");
 };
 
 run();

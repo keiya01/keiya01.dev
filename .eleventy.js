@@ -32,11 +32,14 @@ const useMarkdown = () => {
 };
 
 module.exports = function (config) {
-  config.addPassthroughCopy({ public: "./" });
+  config.addPassthroughCopy({ public: "./public" });
 
   config.setBrowserSyncConfig({
     files: ["dist/**/*"],
   });
+
+  config.setUseGitIgnore(false);
+  config.addWatchTarget("./dist/");
 
   const pages = loadPages();
   Object.values(pages).map((page) => {
@@ -53,7 +56,6 @@ module.exports = function (config) {
       input: "src/contents",
       output: "dist/site",
       layouts: "../../dist/layouts",
-      includes: "../../dist/lib",
     },
   };
 };

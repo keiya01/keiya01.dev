@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "run-s build:clear build:ts start:11ty",
+    "start": "NODE_ENV=production run-s build:clear build:ts start:11ty",
+    "dev": "run-s build:clear build:ts watch",
+    "watch": "ESBUILD_SHOULD_WATCH=true run-p build:ts start:11ty",
     "start:11ty": "yarn build:11ty --serve",
-    "build": "run-s build:clear build:ts build:11ty",
+    "build": "NODE_ENV=production run-s build:clear build:ts build:11ty",
     "build:11ty": "eleventy",
     "build:ts": "yarn exec:ts ./esbuild.config.ts",
     "build:clear": "rimraf dist",
