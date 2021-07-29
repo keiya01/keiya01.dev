@@ -5,6 +5,7 @@ import {
   LIB_FEATURE_ENTRY_POINT,
   LIB_PAGE_ENTRY_POINT,
   OUTPUT_DIST_DIR,
+  SITE_LIB_ENTRY_POINT,
 } from "../constants/foundation";
 
 const loadJSON = <T extends unknown>(filePath: string): T => {
@@ -54,6 +55,11 @@ export const loadFeatureScript = (pageName: string): string => {
     throw new Error(`Could not found ${pageName} feature script`);
   }
   return outputPath;
+};
+
+export const loadPageStyle = (pageName: string): string | undefined => {
+  const entryPoint = `${SITE_LIB_ENTRY_POINT}/${pageName}.css`;
+  return getOutputPath("lib", entryPoint);
 };
 
 export const loadStyle = (pageName: string): string => {
