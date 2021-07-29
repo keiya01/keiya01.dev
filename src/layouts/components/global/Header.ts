@@ -6,6 +6,7 @@ import {
 
 import * as style from "./Header.css";
 import { LinkIcon } from "./LinkIcon";
+import "../../../lib/components/global/color-scheme-button.css";
 
 type Props = {
   title?: string;
@@ -41,6 +42,11 @@ export const Header = ({
             <a class="${style.title}" href="${titleLink}">${title}</a>
           </li>
           ${icons.map((icon) => html`<li class="${style.item}">${icon}</li>`)}
+          <color-scheme-button
+            aria-disabled="true"
+            icon-size="24"
+            label="テーマを変更する"
+          ></color-scheme-button>
         </ul>
       </nav>
     </header>

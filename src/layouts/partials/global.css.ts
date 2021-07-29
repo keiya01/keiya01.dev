@@ -1,8 +1,13 @@
 import { assignVars, globalStyle, style } from "@vanilla-extract/css";
 import { darkVars, lightVars, vars } from "./theme.css";
 
+const assignableThemeVars = {
+  dark: assignVars(vars, darkVars),
+  light: assignVars(vars, lightVars),
+};
+
 globalStyle("html", {
-  vars: assignVars(vars, darkVars),
+  vars: assignableThemeVars.dark,
   lineHeight: 1.8,
   fontSize: 16,
   color: vars.color_base,
@@ -10,7 +15,7 @@ globalStyle("html", {
   fontFamily: `"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;`,
   "@media": {
     "(prefers-color-scheme: light)": {
-      vars: assignVars(vars, lightVars),
+      vars: assignableThemeVars.light,
     },
     "(prefers-reduced-motion: reduce)": {
       scrollBehavior: "auto",
@@ -18,12 +23,21 @@ globalStyle("html", {
   },
 });
 
+globalStyle("html[data-color-scheme='dark']", {
+  vars: assignableThemeVars.dark,
+});
+
+globalStyle("html[data-color-scheme='light']", {
+  vars: assignableThemeVars.light,
+});
+
 globalStyle("body", {
   margin: 0,
   minHeight: "100%",
   height: "100%",
   width: "100%",
-  backgroundColor: vars.background_base,
+  background: vars.background_base,
+  transition: "background ease-in 0.1s",
 });
 
 globalStyle("main", {
@@ -66,7 +80,7 @@ globalStyle("h4", {
 });
 
 globalStyle("pre, code", {
-  backgroundColor: vars.background_code,
+  background: vars.background_code,
 });
 
 globalStyle("pre", {

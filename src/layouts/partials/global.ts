@@ -3,6 +3,7 @@ import {
   loadFeatureScript,
   loadPageScript,
   loadPublicResource,
+  loadPageStyle,
   loadStyle,
 } from "../../helpers/subResourceHelper";
 import { EleventyProps } from "../../types/eleventy";
@@ -18,7 +19,9 @@ export const render = ({
   publics,
   description,
 }: EleventyProps): string => {
+  const globalScript = loadPageScript("global");
   const pageScript = loadPageScript(layout);
+  const pageStyle = loadPageStyle(layout);
 
   return html`<!DOCTYPE html>
     <html lang="ja">
@@ -32,10 +35,13 @@ export const render = ({
         <meta name="color-scheme" content="dark light" />
         <link rel="stylesheet" href="${loadStyle("global")}" />
         <link rel="stylesheet" href="${loadStyle(layout)}" />
+        ${pageStyle && html`<link rel="stylesheet" href="${pageStyle}" />`}
         ${publics?.map(
           (path) =>
             html`<link rel="stylesheet" href="${loadPublicResource(path)}" />`
         )}
+        ${globalScript &&
+        html`<script type="module" src="${globalScript}"></script>`}
         ${pageScript &&
         html`<script type="module" src="${pageScript}"></script>`}
         ${features?.map(
