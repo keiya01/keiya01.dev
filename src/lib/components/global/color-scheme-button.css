@@ -1,0 +1,41 @@
+:root {
+  --color-scheme-button-icon-size: 24px;
+  --color-scheme-button-icon-color--dark: #edcd00;
+  --color-scheme-button-icon-color--light: #ed4f00;
+  --color-scheme-button-color--on: #a770d4;
+  --color-scheme-button-color--off: #fff;
+}
+
+color-scheme-button[aria-disabled="true"] {
+  display: inline-block;
+  opacity: 0.3;
+  border-radius: var(--color-scheme-button-icon-size);
+  padding: 3px;
+  background: var(--color-scheme-button-color--on);
+  position: relative;
+  width: calc(var(--color-scheme-button-icon-size) * 2 + 10px);
+  height: var(--color-scheme-button-icon-size);
+}
+
+color-scheme-button[aria-disabled="true"]::before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: calc(var(--color-scheme-button-icon-size) + 5px);
+  height: var(--color-scheme-button-icon-size);
+  background: var(--color-scheme-button-color--off);
+  position: absolute;
+  top: 3px;
+  transform: translateX(100%);
+  transition: transform ease-in 0.1s, background ease-in 0.1s;
+}
+
+@media (prefers-color-scheme: light) {
+  color-scheme-button[aria-disabled="true"] {
+    background: var(--color-scheme-button-color--off);
+  }
+  color-scheme-button[aria-disabled="true"]::before {
+    transform: translateX(0);
+    background: var(--color-scheme-button-color--on);
+  }
+}
