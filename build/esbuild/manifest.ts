@@ -11,6 +11,30 @@ const AcceptableModuleNames: manifest.AcceptableModuleNames[] = [
   "pages",
 ];
 
+const getModuleName = (entryPoint: string): manifest.AcceptableModuleNames => {
+  const isLayoutPages =
+    entryPoint.startsWith("src/layouts/pages") ||
+    entryPoint.startsWith("src/layouts/partials");
+
+  if (isLayoutPages) {
+    return "pages";
+  }
+
+  const splitEntryPoint = entryPoint.split("/");
+  const isSiteModules = entryPoint.startsWith("dist/site");
+
+  if (isSiteModules) {
+    return splitEntryPoint[2] as manifest.AcceptableModuleNames;
+  }
+
+  const moduleName = splitEntryPoint[1] as manifest.AcceptableModuleNames;
+  if (AcceptableModuleNames.includes(moduleName)) {
+    return moduleName;
+  }
+
+  throw new Error(`${moduleName} is not accepted as entry point`);
+};
+
 export const generateManifest = async (
   { outputRoot }: Options,
   ...metafiles: (Metafile | undefined)[]
@@ -33,21 +57,7 @@ export const generateManifest = async (
           return;
         }
 
-        const isLayoutPages =
-          formattedEntryPoint.startsWith("src/layouts/pages") ||
-          formattedEntryPoint.startsWith("src/layouts/partials");
-
-        const moduleName = (
-          isLayoutPages ? "pages" : formattedEntryPoint.split("/")[1]
-        ) as manifest.AcceptableModuleNames;
-
-        if (
-          !AcceptableModuleNames.includes(
-            moduleName as manifest.AcceptableModuleNames
-          )
-        ) {
-          throw new Error(`${moduleName} is not accepted as entry point`);
-        }
+        const moduleName = getModuleName(formattedEntryPoint);
 
         manifest[moduleName] = {
           ...(manifest[moduleName] || {}),
