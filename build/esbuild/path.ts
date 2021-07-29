@@ -1,4 +1,5 @@
-import { readdir, lstat } from "fs/promises";
+import { readdir, lstat, rename } from "fs/promises";
+import { extname } from "path";
 
 export const getEntryPathname = async (root: string): Promise<string[]> => {
   const entries: string[] = [];
@@ -21,4 +22,25 @@ export const getEntryPathname = async (root: string): Promise<string[]> => {
   };
   await setEntryPathname(root);
   return entries;
+};
+
+export const rename11tyCSS = (root: string): void => {
+  const recursiveRename = async (path: string) => {
+    const dirPaths = await readdir(path);
+    await Promise.all(
+      dirPaths.map(async (filePath) => {
+        const fullPath = `${path}/${filePath}`;
+        const stats = await lstat(fullPath);
+        if (stats.isDirectory()) {
+          await recursiveRename(fullPath);
+          return;
+        }
+        if (extname(path) === ".11ty.css") {
+          const newFileName = `${fullPath.split(".")[0]}.css`;
+          rename(fullPath, newFileName);
+        }
+      })
+    );
+  };
+  recursiveRename(root);
 };

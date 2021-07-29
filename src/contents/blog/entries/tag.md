@@ -1,6 +1,6 @@
 ---
 eleventyExcludeFromCollections: true
-layout: blogEntries
+layout: blog/entries
 pagination:
   data: collections
   size: 1

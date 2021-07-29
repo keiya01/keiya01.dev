@@ -33,8 +33,8 @@ export const render = ({
           "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸"}"
         />
         <meta name="color-scheme" content="dark light" />
-        <link rel="stylesheet" href="${loadStyle("global")}" />
-        <link rel="stylesheet" href="${loadStyle(layout)}" />
+        <link rel="stylesheet" href="${loadStyle("partials/global")}" />
+        <link rel="stylesheet" href="${loadStyle(`pages/${layout}`)}" />
         ${pageStyle && html`<link rel="stylesheet" href="${pageStyle}" />`}
         ${publics?.map(
           (path) =>

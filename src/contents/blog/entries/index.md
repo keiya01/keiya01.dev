@@ -1,4 +1,4 @@
 ---
 eleventyExcludeFromCollections: true
-layout: blogEntries
+layout: blog/entries
 ---

@@ -1,10 +1,10 @@
 import { html } from "common-tags";
 
-import { EleventyData, EleventyProps } from "../../types/eleventy";
-import { getFormattedDate } from "../../utils/date";
-import { TagList } from "../components/entry/TagList";
+import { EleventyData, EleventyProps } from "../../../types/eleventy";
+import { getFormattedDate } from "../../../utils/date";
+import { TagList } from "../../components/entry/TagList";
 
-import * as style from "./blogEntry.css";
+import * as style from "./entry.css";
 
 export const data: EleventyData = {
   layout: "global",

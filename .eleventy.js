@@ -43,9 +43,11 @@ module.exports = function (config) {
 
   const pages = loadPages();
   Object.values(pages).map((page) => {
-    const filename = page.split("/").slice(-1)[0];
-    const name = filename.split(".")[0];
-    config.addLayoutAlias(name, filename);
+    const splitPage = page.split("/");
+    const modulePath = splitPage.slice(2).join("/");
+    const pagePath = splitPage.slice(3).join("/").split(".")[0];
+    console.log(pagePath, modulePath);
+    config.addLayoutAlias(pagePath, modulePath);
   });
 
   config.setLibrary("md", useMarkdown());

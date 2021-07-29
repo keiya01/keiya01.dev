@@ -2,7 +2,7 @@ import { build, BuildOptions } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
 import { copy } from "cpx";
 
-import { getEntryPathname } from "./build/esbuild/path";
+import { getEntryPathname, rename11tyCSS } from "./build/esbuild/path";
 import { generateManifest } from "./build/esbuild/manifest";
 
 const outputRoot = "./dist";
@@ -21,7 +21,7 @@ const run = async () => {
       getEntryPathname("./src/lib/pages"),
       getEntryPathname("./src/lib/features"),
     ]),
-    entryNames: isProduction ? "[name].[hash]" : undefined,
+    entryNames: isProduction ? "[dir]/[name].[hash]" : undefined,
     outdir: `${outputRoot}/site/lib`,
     metafile: true,
     minify: true,
@@ -36,7 +36,7 @@ const run = async () => {
       getEntryPathname("./src/layouts/pages"),
       getEntryPathname("./src/layouts/partials"),
     ]),
-    entryNames: isProduction ? "[name].[hash].11ty" : "[name].11ty",
+    entryNames: isProduction ? "[dir]/[name].[hash].11ty" : "[dir]/[name].11ty",
     outdir: `${outputRoot}/layouts`,
     platform: "node",
     metafile: true,
@@ -49,8 +49,10 @@ const run = async () => {
 
   await generateManifest({ outputRoot }, metafileForLayout, metafileForLib);
 
+  await rename11tyCSS("./dist/layouts");
+
   // copy extracted css to serve css from `site` directory
-  copy("./dist/layouts/*.css", "./dist/site/layouts");
+  copy("./dist/layouts/**/*.css", "./dist/site/layouts");
 };
 
 run();

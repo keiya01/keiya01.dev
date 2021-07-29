@@ -17,7 +17,7 @@ export const loadManifest = (): manifest.Manifest => {
   if (Manifest) {
     return Manifest;
   }
-  const path = resolve(__dirname, `../../${OUTPUT_DIST_DIR}/manifest.json`);
+  const path = resolve(__dirname, `../../../${OUTPUT_DIST_DIR}/manifest.json`);
   Manifest = loadJSON(path);
   if (!Manifest) {
     throw new Error(`Could not found manifest.json in ${path}`);
@@ -37,9 +37,11 @@ const getOutputPath = (
   }
 
   const splitOutputPath = outputPath.split("/");
-  const hashedEntryPointName = splitOutputPath[splitOutputPath.length - 1];
+  const importPath = splitOutputPath
+    .slice(splitOutputPath.indexOf(moduleName))
+    .join("/");
 
-  return `/${moduleName}/${hashedEntryPointName}`;
+  return `/${importPath}`;
 };
 
 export const loadPageScript = (pageName: string): string | undefined => {
@@ -64,10 +66,9 @@ export const loadPageStyle = (pageName: string): string | undefined => {
 
 export const loadStyle = (pageName: string): string => {
   const entryPoint = `${LAYOUT_ENTRY_POINT}/${pageName}.css`;
-
   const outputPath = getOutputPath("layouts", entryPoint);
   if (!outputPath) {
-    throw new Error(`Could not found ${pageName} style`);
+    throw new Error(`Could not found ${pageName} style in ${outputPath}`);
   }
   return outputPath;
 };

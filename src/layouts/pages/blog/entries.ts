@@ -1,11 +1,11 @@
 import { html } from "common-tags";
-import { PROFILE_TWITTER_URL } from "../../constants/profile";
+import { PROFILE_TWITTER_URL } from "../../../constants/profile";
 
-import { EleventyData, EleventyProps } from "../../types/eleventy";
-import { ListItem } from "../components/entry/ListItem";
-import { Thumbnail } from "../components/global/Thumbnail";
+import { EleventyData, EleventyProps } from "../../../types/eleventy";
+import { ListItem } from "../../components/entry/ListItem";
+import { Thumbnail } from "../../components/global/Thumbnail";
 
-import * as style from "./blogEntries.css";
+import * as style from "./entries.css";
 
 export const data: EleventyData = {
   layout: "global",
