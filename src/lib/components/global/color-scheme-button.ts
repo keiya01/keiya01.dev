@@ -174,10 +174,10 @@ class ColorSchemeButton extends HTMLElement {
 
     shadow.innerHTML = `
       <style>${this.getStyle()}</style>
-      <label for="switch" aria-label="${this.label}">
-        <button type="button" id="switch" role="switch" aria-checked="${
-          this.checked
-        }">
+      <label for="switch">
+        <button aria-label="${this.label}" aria-checked="${
+      this.checked
+    }" type="button" id="switch" role="switch">
         <span class="dark-icon">${this.darkIcon("ダークテーマ")}</span>
         <span class="light-icon">${this.lightIcon("ライトテーマ")}</span>
         </button>
