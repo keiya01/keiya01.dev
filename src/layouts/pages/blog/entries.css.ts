@@ -35,6 +35,6 @@ export const profileName = style({
   boxShadow: `0 1px 0 0 currentColor`,
   fontSize: 16,
   ":hover": {
-    color: vars.color_header_link,
+    color: vars.color_link,
   },
 });

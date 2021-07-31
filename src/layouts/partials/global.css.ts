@@ -54,19 +54,6 @@ globalStyle("h2, h3, h4", {
   width: "100%",
 });
 
-globalStyle(":is(h2, h3, h4) > a", {
-  padding: "0 0 6px",
-  width: "100%",
-  borderBottom: `1px solid ${vars.color_base}`,
-  textDecoration: "none",
-  display: "inline-block",
-});
-
-globalStyle(":is(h2, h3, h4) > a:hover", {
-  color: vars.color_header_link,
-  borderBottomColor: vars.color_header_link,
-});
-
 globalStyle("h2", {
   fontSize: 25,
 });
@@ -77,6 +64,36 @@ globalStyle("h3", {
 
 globalStyle("h4", {
   fontSize: 19,
+});
+
+globalStyle(":is(h2, h3, h4) > a", {
+  padding: "0 0 6px",
+  width: "100%",
+  color: vars.color_base,
+  borderBottom: `1px solid ${vars.color_base}`,
+  textDecoration: "none",
+  display: "inline-block",
+});
+
+globalStyle(":is(h2, h3, h4) > a:hover", {
+  "@media": {
+    "(hover: hover)": {
+      color: vars.color_link,
+      borderBottomColor: vars.color_link,
+    },
+  },
+});
+
+globalStyle("p > a", {
+  color: vars.color_link,
+});
+
+globalStyle("p > a:hover", {
+  "@media": {
+    "(hover: hover)": {
+      color: vars.color_active_link,
+    },
+  },
 });
 
 globalStyle("pre, code", {
