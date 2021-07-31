@@ -30,11 +30,6 @@ export const list = style({
 
 export const item = style({
   margin: "0 10px",
-  selectors: {
-    "&:last-child": {
-      margin: "0 30px 0 10px",
-    },
-  },
 });
 globalStyle(`${item} > a`, {
   display: "flex",

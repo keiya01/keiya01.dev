@@ -42,11 +42,13 @@ export const Header = ({
             <a class="${style.title}" href="${titleLink}">${title}</a>
           </li>
           ${icons.map((icon) => html`<li class="${style.item}">${icon}</li>`)}
-          <color-scheme-button
-            aria-disabled="true"
-            icon-size="24"
-            label="テーマを変更する"
-          ></color-scheme-button>
+          <li class="${style.item}">
+            <color-scheme-button
+              aria-disabled="true"
+              icon-size="24"
+              label="テーマを変更する"
+            ></color-scheme-button>
+          </li>
         </ul>
       </nav>
     </header>
