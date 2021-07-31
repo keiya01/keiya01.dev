@@ -16,6 +16,8 @@ export const darkVars = {
 
   border_blockquote: "#9684a3",
 
+  border_boundary_color: "#4c464f",
+
   outline_box_shadow: "0 0 0 3px #870144",
   outline_box_shadow_inset: "0 0 0 3px #870144 inset",
 
@@ -31,6 +33,7 @@ export const lightVars = {
   background_base: "#fff",
   background_tag: "#d6a1ff",
   border_blockquote: "#64566e",
+  border_boundary_color: "#c4bdc9",
 };
 
 export const vars = createThemeContract(darkVars);
