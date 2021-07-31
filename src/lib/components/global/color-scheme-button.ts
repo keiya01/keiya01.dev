@@ -84,16 +84,32 @@ class ColorSchemeButton extends HTMLElement {
     return `
       :host {
         display: inline-block;
+      }
+
+      button {
+        display: flex;
+        justify-content: space-between;
         border-radius: var(--color-scheme-button-icon-size);
         padding: 3px;
-        background: var(--color-scheme-button-color--on);
         position: relative;
+        box-sizing: content-box;
+        background: var(--color-scheme-button-color--on);
         width: calc(var(--color-scheme-button-icon-size) * 2 + 10px);
         height: var(--color-scheme-button-icon-size);
         transition: background ease-in 0.1s;
+        outline: none;
+        border: none;
       }
 
-      :host::before {
+      button:focus {
+        box-shadow: 0 0 0 3px var(--color-scheme-button-outline-color);
+      }
+
+      button:focus:not(:focus-visible) {
+        box-shadow: none;
+      }
+
+      button::before {
         content: "";
         display: inline-block;
         border-radius: var(--color-scheme-button-icon-size);
@@ -106,29 +122,17 @@ class ColorSchemeButton extends HTMLElement {
         transition: transform ease-in 0.1s, background ease-in 0.1s;
       }
 
-      :host(color-scheme-button[aria-checked="false"]) {
+      :host(color-scheme-button[aria-checked="false"]) > label > button {
         background: var(--color-scheme-button-color--off);
       }
 
-      :host(color-scheme-button[aria-checked="false"])::before {
+      :host(color-scheme-button[aria-checked="false"]) > label > button::before {
         transform: translateX(0);
         background: var(--color-scheme-button-color--on);
       }
 
       label {
         display: inline-block;
-        width: 100%;
-        height: 100%;
-      }
-
-      button {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        border: none;
-        background: transparent;
       }
 
       img {

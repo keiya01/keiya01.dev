@@ -15,6 +15,10 @@ export const tagItem = style({
 
 export const tagLink = style({
   textDecoration: "none",
+  borderRadius: 5,
   display: "inline-block",
   padding: "1px 3px",
+  ":focus": {
+    boxShadow: vars.outline_box_shadow_inset,
+  },
 });

@@ -115,12 +115,12 @@ globalStyle("p, time, span", {
 });
 
 globalStyle(":is(a, button):focus", {
-  outline: `3px solid ${vars.outline_color}`,
-  outlineOffset: -3,
+  outline: "none",
+  boxShadow: vars.outline_box_shadow,
 });
 
 globalStyle(":is(a, button):focus:not(:focus-visible)", {
-  outline: "none",
+  boxShadow: "none",
 });
 
 export const wrapper = style({

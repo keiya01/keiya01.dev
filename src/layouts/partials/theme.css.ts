@@ -13,7 +13,8 @@ export const darkVars = {
   background_tag: "#570099",
   background_header: "#1e0036",
 
-  outline_color: "#870144",
+  outline_box_shadow: "0 0 0 3px #870144",
+  outline_box_shadow_inset: "0 0 0 3px #870144 inset",
 
   content_width: "680px",
 };

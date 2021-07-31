@@ -4,6 +4,7 @@
   --color-scheme-button-icon-color--light: #ed4f00;
   --color-scheme-button-color--on: #a770d4;
   --color-scheme-button-color--off: #fff;
+  --color-scheme-button-outline-color: #870144;
 }
 
 color-scheme-button[aria-disabled="true"] {
