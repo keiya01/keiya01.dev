@@ -27,6 +27,7 @@ export const render = ({
     <html lang="ja">
       <head>
         <title>${title || "blog - Keiya Sasaki"}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content="${description ||
