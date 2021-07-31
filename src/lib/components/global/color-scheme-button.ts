@@ -1,6 +1,7 @@
 const DataColorScheme = "data-color-scheme";
 
 type ColorSchemeUnion = "dark" | "light";
+
 const ColorScheme: { [K in ColorSchemeUnion]: ColorSchemeUnion } = {
   dark: "dark",
   light: "light",
@@ -47,7 +48,21 @@ class ColorSchemeButton extends HTMLElement {
       `(prefers-color-scheme: ${ColorScheme.light})`
     ).matches;
     this.checked = !isLight;
-    this.setAttribute("aria-disabled", "false");
+
+    if (!this.disabled) {
+      throw new Error(
+        "<color-scheme-button> should has `aria-disabled` attribute at initial rendering"
+      );
+    }
+    this.disabled = false;
+  }
+
+  set disabled(disabled: boolean) {
+    this.setAttribute("aria-disabled", `${disabled}`);
+  }
+
+  get disabled(): boolean {
+    return this.getAttribute("aria-disabled") === "true";
   }
 
   set checked(checked: boolean) {
