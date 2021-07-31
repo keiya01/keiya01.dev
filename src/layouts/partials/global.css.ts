@@ -140,6 +140,12 @@ globalStyle(":is(a, button):focus:not(:focus-visible)", {
   boxShadow: "none",
 });
 
+globalStyle("blockquote", {
+  margin: "2em 40px",
+  borderLeft: `5px solid ${vars.border_blockquote}`,
+  padding: "10px 0 10px 20px",
+});
+
 export const wrapper = style({
   margin: "0 20px",
 });
