@@ -54,26 +54,18 @@ const fn = () => console.log("Hello World");
 
 下の方法で行います。
 
-- 初回のビルドで `public/contents/blog_filename` 配下の画像を `webp` や `AVIF` 、 サイズを変換します。
+- 初回のビルドで `public/contents/blog_filename` 配下の画像を `webp` や `AVIF` へ変換します。
 - 変換されたファイルは `public/contents/blog_filename` に格納されます。
 - 2 回目以降はこれらの画像の存在を確認し、存在していれば画像のビルドをスキップします。
 
 ### 花火の画像です。
 
+画像の埋め込みはマクロでやってもいいな。
+
 横長の画像です。
 
-<img
-  alt="Lighthouse のスコアが全て 100 点"
-  src="/public/contents/blog/entry/features/hanabi.png"
-  height=252
-  width=883
-/>
+::: picture 883x252 "Lighthouse のスコアが全て 100 点" "/public/contents/blog/entry/features/hanabi.png" :::
 
 正方形の画像です。
 
-<img
-  alt="Lighthouse のスコアが全て 100 点"
-  src="/public/contents/blog/entry/features/hanabi_all.png"
-  height=711
-  width=883
-/>
+::: picture 883x711 "Lighthouse のスコアが全て 100 点" "/public/contents/blog/entry/features/hanabi_all.png" :::

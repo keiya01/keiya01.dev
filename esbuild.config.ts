@@ -4,6 +4,7 @@ import { copy } from "cpx";
 
 import { getEntryPathname, rename11tyCSS } from "./build/esbuild/path";
 import { generateManifest } from "./build/esbuild/manifest";
+import { transformContentsImages } from "./build/image/transform";
 
 const outputRoot = "./dist";
 
@@ -50,6 +51,8 @@ const run = async () => {
   await generateManifest({ outputRoot }, metafileForLayout, metafileForLib);
 
   await rename11tyCSS("./dist/layouts");
+
+  await transformContentsImages("./public/contents");
 
   // copy extracted css to serve css from `site` directory
   copy("./dist/layouts/**/*.css", "./dist/site/layouts");

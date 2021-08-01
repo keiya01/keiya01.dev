@@ -146,13 +146,13 @@ globalStyle("blockquote", {
   padding: "10px 0 10px 20px",
 });
 
-globalStyle("p > img", {
+globalStyle("p img", {
   maxWidth: "100%",
   height: "auto",
   objectFit: "contain",
 });
 
-globalStyle("p > img", {
+globalStyle("p img", {
   display: "block",
   border: `1px solid ${vars.border_boundary_color}`,
   borderRadius: 10,

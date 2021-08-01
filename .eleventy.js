@@ -14,10 +14,46 @@ const loadPages = () => {
   return _Pages;
 };
 
+/** Usage
+ * ::: picture 100x200 "description" "/public/img/example.png" :::
+ */
+const usePicture = () => {
+  const match = (text) =>
+    text.match(/^picture\s(\d+x\d+)\s(".+")\s(".+")\s:::$/);
+  const options = {
+    validate: (params) => match(params.trim()),
+    render: (tokens, idx) => {
+      const token = tokens[idx];
+      if (token.nesting === 1) {
+        const [, size, description, src] = match(token.info.trim());
+
+        const noExtensionSrc = src.split(".")[0];
+        const webpSrc = `${noExtensionSrc}.webp"`;
+        const avifSrc = `${noExtensionSrc}.avif"`;
+
+        const [width, height] = size.split("x");
+
+        return `
+          <p>
+            <picture>
+              <source srcset=${avifSrc} type="image/avif" />
+              <source srcset=${webpSrc} type="image/webp" />
+              <img alt=${description} src=${src} width="${width}" height="${height}" />
+            </picture>
+          </p>
+        `;
+      }
+      return "";
+    },
+  };
+  return ["picture", options];
+};
+
 const useMarkdown = () => {
   const markdownIt = require("markdown-it");
   const prism = require("prismjs");
   const anchor = require("markdown-it-anchor");
+  const container = require("markdown-it-container");
 
   const options = {
     html: true,
@@ -26,9 +62,11 @@ const useMarkdown = () => {
       return prism.highlight(str.trim(), prism.languages[lang], lang);
     },
   };
-  return markdownIt(options).use(anchor, {
-    permalink: anchor.permalink.headerLink(),
-  });
+  return markdownIt(options)
+    .use(anchor, {
+      permalink: anchor.permalink.headerLink(),
+    })
+    .use(container, ...usePicture());
 };
 
 module.exports = function (config) {

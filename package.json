@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
+    "@squoosh/lib": "^0.4.0",
     "@textlint/textlint-plugin-markdown": "^12.0.2",
     "@types/common-tags": "^1.8.1",
     "@types/cpx": "^1.5.2",
@@ -40,11 +41,13 @@
     "eslint-config-prettier": "^8.3.0",
     "markdown-it": "^12.1.0",
     "markdown-it-anchor": "^8.1.2",
+    "markdown-it-container": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
     "prismjs": "^1.24.1",
     "rimraf": "^3.0.2",
     "textlint": "^12.0.2",
+    "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-rule-preset-ja-technical-writing": "^7.0.0",
     "typescript": "^4.3.5"
   },

@@ -24,7 +24,7 @@ export const getEntryPathname = async (root: string): Promise<string[]> => {
   return entries;
 };
 
-export const rename11tyCSS = (root: string): void => {
+export const rename11tyCSS = async (root: string): Promise<void> => {
   const recursiveRename = async (path: string) => {
     const dirPaths = await readdir(path);
     await Promise.all(
@@ -42,5 +42,5 @@ export const rename11tyCSS = (root: string): void => {
       })
     );
   };
-  recursiveRename(root);
+  await recursiveRename(root);
 };

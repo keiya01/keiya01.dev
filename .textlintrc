@@ -2,6 +2,13 @@
   "rules": {
     "preset-ja-technical-writing": true
   },
+  "filters": {
+    "allowlist": {
+      "allow": [
+        "/:::.+(\\n.+\\n)?:::/"
+      ]
+    }
+  },
   "plugins": {
     "@textlint/markdown": true
   }
