@@ -1,8 +1,11 @@
-import { build, BuildOptions } from "esbuild";
+import { build as esbuild, BuildOptions } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
-import { copy } from "cpx";
 
-import { getEntryPathname, rename11tyCSS } from "./build/esbuild/path";
+import {
+  asyncCopy,
+  getEntryPathname,
+  rename11tyCSS,
+} from "./build/esbuild/path";
 import { generateManifest } from "./build/esbuild/manifest";
 import { transformContentsImages } from "./build/image/transform";
 
@@ -15,7 +18,7 @@ const promiseAllFlat = async <T extends unknown>(
   promises: Promise<T[]>[]
 ): Promise<T[]> => await Promise.all(promises).then((res) => res.flat());
 
-const run = async () => {
+const build = async () => {
   const libOptions: BuildOptions = {
     format: "esm",
     entryPoints: await promiseAllFlat([
@@ -29,7 +32,7 @@ const run = async () => {
     bundle: true,
     watch: shouldWatch,
   };
-  const { metafile: metafileForLib } = await build(libOptions);
+  const { metafile: metafileForLib } = await esbuild(libOptions);
 
   const layoutOptions: BuildOptions = {
     format: "cjs",
@@ -46,16 +49,18 @@ const run = async () => {
     watch: shouldWatch,
     plugins: [vanillaExtractPlugin()],
   };
-  const { metafile: metafileForLayout } = await build(layoutOptions);
+  const { metafile: metafileForLayout } = await esbuild(layoutOptions);
 
-  await generateManifest({ outputRoot }, metafileForLayout, metafileForLib);
+  Promise.all([
+    generateManifest({ outputRoot }, metafileForLayout, metafileForLib),
+    rename11tyCSS("./dist/layouts"),
+    // copy extracted css to serve css from `site` directory
+    asyncCopy("./dist/layouts/**/*.css", "./dist/site/layouts"),
+  ]);
+};
 
-  await rename11tyCSS("./dist/layouts");
-
-  await transformContentsImages("./public/contents");
-
-  // copy extracted css to serve css from `site` directory
-  copy("./dist/layouts/**/*.css", "./dist/site/layouts");
+const run = async () => {
+  await Promise.all([build(), transformContentsImages("./public/contents")]);
 };
 
 run();

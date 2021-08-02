@@ -1,3 +1,4 @@
+import { copy } from "cpx";
 import { readdir, lstat, rename } from "fs/promises";
 import { extname } from "path";
 
@@ -44,3 +45,13 @@ export const rename11tyCSS = async (root: string): Promise<void> => {
   };
   await recursiveRename(root);
 };
+
+export const asyncCopy = (src: string, dest: string): Promise<void> =>
+  new Promise((resolve, reject) =>
+    copy(src, dest, (err) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve();
+    })
+  );

@@ -10,7 +10,7 @@
     "start:11ty": "yarn build:11ty --serve",
     "build": "NODE_ENV=production run-s build:clear build:ts build:11ty",
     "build:11ty": "eleventy",
-    "build:ts": "yarn exec:ts ./esbuild.config.ts",
+    "build:ts": "yarn exec:ts ./build.ts",
     "build:clear": "rimraf dist",
     "lint": "run-p lint:*",
     "lint:tsc": "tsc --noEmit",
