@@ -10,7 +10,7 @@ export const darkVars = {
   color_twitter: "#1da1f2",
 
   background_base: "#27222a",
-  background_code: "#4e4752",
+  background_code: "#141414",
   background_tag: "#570099",
   background_header: "#1e0036",
 
@@ -32,7 +32,7 @@ export const lightVars = {
   color_base: "#27222a",
   background_base: "#fff",
   background_tag: "#d6a1ff",
-  background_code: "#413c44",
+  background_code: "#272329",
   border_blockquote: "#64566e",
   border_boundary_color: "#c4bdc9",
 };
