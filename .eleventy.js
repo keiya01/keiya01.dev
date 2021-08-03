@@ -14,6 +14,22 @@ const loadPages = () => {
   return _Pages;
 };
 
+const minifyHTML = (content, outputPath) => {
+  if (outputPath && outputPath.endsWith(".html")) {
+    let minified = require("html-minifier").minify(content, {
+      removeComments: true,
+      collapseInlineTagWhitespace: true,
+      collapseWhitespace: true,
+      minifyCSS: true,
+      minifyJS: true,
+      removeAttributeQuotes: true,
+    });
+    return minified;
+  }
+
+  return content;
+};
+
 /** Usage
  * ::: picture 100x200 "description" "/public/img/example.png" :::
  */
@@ -77,7 +93,12 @@ module.exports = function (config) {
   });
 
   config.setUseGitIgnore(false);
+
   config.addWatchTarget("./dist/");
+
+  config.addTransform("htmlmin", minifyHTML);
+
+  config.setLibrary("md", useMarkdown());
 
   const pages = loadPages();
   Object.values(pages).map((page) => {
@@ -87,8 +108,6 @@ module.exports = function (config) {
     console.log(pagePath, modulePath);
     config.addLayoutAlias(pagePath, modulePath);
   });
-
-  config.setLibrary("md", useMarkdown());
 
   return {
     templateFormats: ["md"],
