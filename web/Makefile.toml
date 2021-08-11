@@ -1,0 +1,6 @@
+[tasks.bootstrap]
+command = "yarn"
+
+[tasks.build]
+command = "yarn"
+args = ["build"]
