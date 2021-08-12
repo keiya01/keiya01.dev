@@ -8,5 +8,5 @@ dependencies = [
 clear = true
 dependencies = [
   { name = "build", path = "./web" },
-  { name = "build", path = "./build" },
+  { name = "run", path = "./lib" },
 ]

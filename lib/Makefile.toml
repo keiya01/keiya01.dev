@@ -1,5 +1,5 @@
-[tasks.build]
+[tasks.run]
 command = "cargo"
 args = [
-  "build"
+  "run"
 ]
