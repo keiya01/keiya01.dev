@@ -31,17 +31,70 @@ const minifyHTML = (content, outputPath) => {
 };
 
 /** Usage
- * ::: picture 100x200 "description" "/public/img/example.png" :::
+ * ::: picture size=100x200 description="description" src="/public/img/example.png" lazy=false :::
  */
 const usePicture = () => {
-  const match = (text) =>
-    text.match(/^picture\s(\d+x\d+)\s(".+")\s(".+")\s:::$/);
+  const BLOCK_NAME = "picture";
+
+  const properties = {
+    size: {
+      reg: "\\d+x\\d+",
+    },
+    description: {
+      reg: `".+"`,
+    },
+    src: {
+      reg: `"(\/.+)+"`,
+    },
+    loading: {
+      reg: `eager`,
+      optional: true,
+    },
+  };
+
+  const getEntryMap = (text) => {
+    const splitText = text.split(/\s(?=\S+=.+)|\s:::$/).filter(Boolean);
+    const name = splitText.shift();
+    if (name !== BLOCK_NAME) {
+      throw new Error(`${name} is not supported`);
+    }
+
+    return splitText.reduce((res, kv) => {
+      const [k, v] = kv.split("=");
+      return { ...res, [k]: v };
+    }, {});
+  };
+
+  const match = (text) => {
+    const entryMap = getEntryMap(text);
+
+    return Object.keys(properties).every((key) => {
+      const prop = properties[key];
+      const entry = entryMap[key];
+
+      if (prop.optional && !entry) {
+        return true;
+      }
+
+      if (!entry) {
+        return false;
+      }
+
+      return new RegExp(prop.reg).test(entry);
+    });
+  };
+
   const options = {
     validate: (params) => match(params.trim()),
     render: (tokens, idx) => {
       const token = tokens[idx];
       if (token.nesting === 1) {
-        const [, size, description, src] = match(token.info.trim());
+        const {
+          size,
+          description,
+          src,
+          loading = "lazy",
+        } = getEntryMap(token.info.trim());
 
         const noExtensionSrc = src.split(".")[0];
         const webpSrc = `${noExtensionSrc}.webp"`;
@@ -54,7 +107,7 @@ const usePicture = () => {
             <picture>
               <source srcset=${avifSrc} type="image/avif" />
               <source srcset=${webpSrc} type="image/webp" />
-              <img alt=${description} src=${src} width="${width}" height="${height}" />
+              <img alt=${description} src=${src} width="${width}" height="${height}" loading=${loading} />
             </picture>
           </p>
         `;
@@ -62,7 +115,7 @@ const usePicture = () => {
       return "";
     },
   };
-  return ["picture", options];
+  return [BLOCK_NAME, options];
 };
 
 const useMarkdown = () => {
@@ -105,7 +158,6 @@ module.exports = function (config) {
     const splitPage = page.split("/");
     const modulePath = splitPage.slice(2).join("/");
     const pagePath = splitPage.slice(3).join("/").split(".")[0];
-    console.log(pagePath, modulePath);
     config.addLayoutAlias(pagePath, modulePath);
   });
 
