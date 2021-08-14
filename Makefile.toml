@@ -10,3 +10,15 @@ dependencies = [
   { name = "build", path = "./web" },
   { name = "run", path = "./lib" },
 ]
+
+[tasks.dev]
+dependencies = [
+  # TODO: replace Web build with Rust build
+  { name = "dev", path = "./web" },
+]
+
+[tasks.start]
+dependencies = [
+  # TODO: replace Web build with Rust build
+  { name = "start", path = "./web" },
+]

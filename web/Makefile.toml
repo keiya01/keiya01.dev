@@ -4,3 +4,11 @@ command = "yarn"
 [tasks.build]
 command = "yarn"
 args = ["build"]
+
+[tasks.dev]
+command = "yarn"
+args = ["dev"]
+
+[tasks.start]
+command = "yarn"
+args = ["start"]
