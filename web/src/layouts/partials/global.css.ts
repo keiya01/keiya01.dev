@@ -38,6 +38,11 @@ globalStyle("body", {
   width: "100%",
   background: vars.background_base,
   transition: "background ease-in 0.1s",
+  "@media": {
+    "(prefers-reduced-motion: reduce)": {
+      transition: "none",
+    },
+  },
 });
 
 globalStyle("main", {

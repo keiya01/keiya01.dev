@@ -137,6 +137,16 @@ class ColorSchemeButton extends HTMLElement {
         transition: transform ease-in 0.1s, background ease-in 0.1s;
       }
 
+      @media(prefers-reduced-motion: reduce) {
+        button {
+          transition: none;
+        }
+
+        button::before {
+          transition: none;
+        }
+      }
+
       :host(color-scheme-button[aria-checked="false"]) > label > button {
         background: var(--color-scheme-button-color--off);
       }
