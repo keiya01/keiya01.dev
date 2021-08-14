@@ -14,7 +14,7 @@ import * as style from "../partials/global.css";
 export const render = ({
   layout,
   title,
-  features,
+  features = [],
   content,
   publics,
   description,
@@ -22,6 +22,8 @@ export const render = ({
   const globalScript = loadPageScript("global");
   const pageScript = loadPageScript(layout);
   const pageStyle = loadPageStyle(layout);
+
+  features.push("global");
 
   return html`<!DOCTYPE html>
     <html lang="ja">

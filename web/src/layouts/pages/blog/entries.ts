@@ -9,7 +9,6 @@ import * as style from "./entries.css";
 
 export const data: EleventyData = {
   layout: "global",
-  features: ["webVitals"],
 };
 
 export const render = ({ collections, tag }: EleventyProps): string => {

@@ -50,7 +50,11 @@ export const generateManifest = async (
 
         const isCSS = hashedEntryPoint.endsWith(".css");
         if (isCSS) {
+          // dist/example.[hash].11ty.css to dist/example.css
           formattedEntryPoint = hashedEntryPoint.split(".")[0] + ".css";
+          // dist/example.[hash].11ty.css to dist/example.[hash].css
+          hashedEntryPoint =
+            hashedEntryPoint.split(".").slice(0, -2).join(".") + ".css";
         }
 
         if (!formattedEntryPoint) {

@@ -8,7 +8,6 @@ import * as style from "./entry.css";
 
 export const data: EleventyData = {
   layout: "global",
-  features: ["webVitals"],
   publics: ["css/prism.css"],
 };
 

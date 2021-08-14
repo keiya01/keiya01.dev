@@ -51,11 +51,14 @@ const build = async () => {
   };
   const { metafile: metafileForLayout } = await esbuild(layoutOptions);
 
+  const cssProcess = rename11tyCSS("./dist/layouts").then(() =>
+    // copy extracted css to serve css from `site` directory
+    asyncCopy("./dist/layouts/**/*.css", "./dist/site/layouts")
+  );
+
   Promise.all([
     generateManifest({ outputRoot }, metafileForLayout, metafileForLib),
-    rename11tyCSS("./dist/layouts"),
-    // copy extracted css to serve css from `site` directory
-    asyncCopy("./dist/layouts/**/*.css", "./dist/site/layouts"),
+    cssProcess,
   ]);
 };
 

@@ -36,8 +36,11 @@ export const rename11tyCSS = async (root: string): Promise<void> => {
           await recursiveRename(fullPath);
           return;
         }
-        if (extname(path) === ".11ty.css") {
-          const newFileName = `${fullPath.split(".")[0]}.css`;
+        if (fullPath.split(".").slice(-2).join(".") === "11ty.css") {
+          const newFileName = `${fullPath
+            .split(".")
+            .slice(0, -2)
+            .join(".")}.css`;
           rename(fullPath, newFileName);
         }
       })
