@@ -139,7 +139,10 @@ const useMarkdown = () => {
 };
 
 module.exports = function (config) {
-  config.addPassthroughCopy({ public: "./public" });
+  config.addPassthroughCopy({
+    public: "./public",
+    "public/js/sw.js": "sw.js",
+  });
 
   config.setBrowserSyncConfig({
     files: ["dist/**/*"],
