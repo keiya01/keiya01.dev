@@ -1,2 +1,0 @@
-import "./webVitals";
-import "./sw";

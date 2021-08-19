@@ -1,6 +1,5 @@
 import { html } from "common-tags";
 import {
-  loadFeatureScript,
   loadPageScript,
   loadPublicResource,
   loadPageStyle,
@@ -14,7 +13,6 @@ import * as style from "../partials/global.css";
 export const render = ({
   layout,
   title,
-  features = [],
   content,
   publics,
   description,
@@ -22,8 +20,6 @@ export const render = ({
   const globalScript = loadPageScript("global");
   const pageScript = loadPageScript(layout);
   const pageStyle = loadPageStyle(layout);
-
-  features.push("global");
 
   return html`<!DOCTYPE html>
     <html lang="ja">
@@ -47,10 +43,6 @@ export const render = ({
         html`<script type="module" src="${globalScript}"></script>`}
         ${pageScript &&
         html`<script type="module" src="${pageScript}"></script>`}
-        ${features?.map(
-          (name) =>
-            `<script type="module" src="${loadFeatureScript(name)}"></script>`
-        )}
       </head>
       <body>
         ${Header()}

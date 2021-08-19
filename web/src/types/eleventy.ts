@@ -18,7 +18,6 @@ export type EleventyProps = {
   content: string;
   page: PageData;
   layout: string; // This property include page name.
-  features?: string[];
   publics?: string[];
   tags?: string[];
   tag?: string;

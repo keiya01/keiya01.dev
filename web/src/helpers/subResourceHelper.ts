@@ -49,16 +49,6 @@ export const loadPageScript = (pageName: string): string | undefined => {
   return getOutputPath("lib", entryPoint);
 };
 
-export const loadFeatureScript = (pageName: string): string => {
-  const entryPoint = `${LIB_FEATURE_ENTRY_POINT}/${pageName}.ts`;
-
-  const outputPath = getOutputPath("lib", entryPoint);
-  if (!outputPath) {
-    throw new Error(`Could not found ${pageName} feature script`);
-  }
-  return outputPath;
-};
-
 export const loadPageStyle = (pageName: string): string | undefined => {
   const entryPoint = `${SITE_LIB_ENTRY_POINT}/${pageName}.css`;
   return getOutputPath("lib", entryPoint);

@@ -21,10 +21,7 @@ const promiseAllFlat = async <T extends unknown>(
 const build = async () => {
   const libOptions: BuildOptions = {
     format: "esm",
-    entryPoints: await promiseAllFlat([
-      getEntryPathname("./src/lib/pages"),
-      getEntryPathname("./src/lib/features"),
-    ]),
+    entryPoints: await getEntryPathname("./src/lib/pages"),
     entryNames: isProduction ? "[dir]/[name].[hash]" : undefined,
     outdir: `${outputRoot}/site/lib`,
     metafile: true,
