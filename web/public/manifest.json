@@ -1,0 +1,26 @@
+{
+  "name": "keiya01's blog app",
+  "short_name": "keiya01's blog",
+  "description": "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸",
+  "icons": [
+    {
+      "src": "public/icons/thumbnail_circle.jpg",
+      "sizes": "120x120",
+      "type": "image/jpg"
+    },
+    {
+      "src": "public/icons/thumbnail_circle.jpg",
+      "sizes": "180x180",
+      "type": "image/jpg"
+    },
+    {
+      "src": "public/icons/thumbnail_circle.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ],
+  "start_url": "/blog/entries",
+  "display": "fullscreen",
+  "theme_color": "#27222a",
+  "background_color": "#27222a"
+}
