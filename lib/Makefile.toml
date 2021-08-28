@@ -1,5 +1,0 @@
-[tasks.run]
-command = "cargo"
-args = [
-  "run"
-]

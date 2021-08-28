@@ -1,0 +1,8 @@
+[tasks.ogp]
+workspace = false
+command = "cargo"
+args = [
+  "run",
+  "-p",
+  "ogp"
+]

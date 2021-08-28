@@ -8,7 +8,7 @@ dependencies = [
 clear = true
 dependencies = [
   { name = "build", path = "./web" },
-  { name = "run", path = "./lib" },
+  { name = "ogp", path = "./build" },
 ]
 
 [tasks.dev]
