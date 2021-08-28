@@ -9,10 +9,10 @@ const cacheFiles = [
   "/public/webp/thumbnail_circle.webp",
   "/public/png/github.png",
   "/public/svg/twitter.svg",
+  "/public/icons/thumbnail_circle.png",
 ];
 
 self.addEventListener("install", (e) => {
-  console.log("INSTALL in SW");
   const install = async () => {
     const cache = await caches.open(cacheName);
     await cache.addAll(cacheFiles);
@@ -21,7 +21,6 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("activate", (e) => {
-  console.log("ACTIVATE in SW");
   e.waitUntil(
     caches.keys().then((keyList) => {
       Promise.all(
@@ -36,17 +35,44 @@ self.addEventListener("activate", (e) => {
   );
 });
 
+// Only use SWR strategy
 self.addEventListener("fetch", (e) => {
-  console.log("FETCH in SW");
+  if (e.request.method !== "GET") {
+    return;
+  }
+
   e.respondWith(
     (async () => {
-      const r = await caches.match(e.request);
-      if (r) {
-        return r;
+      const handledResponse = fetch(e.request).then((res) => {
+        const url = new URL(e.request.url);
+        if (!cacheFiles.includes(url.pathname)) {
+          return res;
+        }
+
+        // レスポンスを取得したら非同期にキャッシュに格納する
+        const clonedResponse = res.clone();
+        (async () => {
+          /**
+           * @see https://github.com/GoogleChrome/workbox/blob/v6/packages/workbox-strategies/src/StrategyHandler.ts#L309-L311
+           */
+          await (e.handled || new Promise((resolve) => setTimeout(resolve, 0)));
+
+          const cache = await caches.open(cacheName);
+          await cache.put(e.request, clonedResponse);
+        })();
+
+        return res;
+      });
+
+      // fetchしている間はキャッシュからレスポンスを返す
+      const cachedResponse = await caches.match(e.request);
+      if (cachedResponse) {
+        return cachedResponse;
       }
-      const response = await fetch(e.request);
-      const cache = await caches.open(cacheName);
-      await cache.put(e.request, response.clone());
+
+      // キャッシュが存在しない場合はレスポンスを待ち、解決され次第、レスポンスを返す
+      const response = await handledResponse;
+
       return response;
     })()
   );

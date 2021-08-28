@@ -4,19 +4,9 @@
   "description": "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸",
   "icons": [
     {
-      "src": "public/icons/thumbnail_circle.jpg",
-      "sizes": "120x120",
-      "type": "image/jpg"
-    },
-    {
-      "src": "public/icons/thumbnail_circle.jpg",
-      "sizes": "180x180",
-      "type": "image/jpg"
-    },
-    {
-      "src": "public/icons/thumbnail_circle.jpg",
-      "sizes": "512x512",
-      "type": "image/jpg"
+      "src": "public/icons/thumbnail_circle.png",
+      "sizes": "400x400",
+      "type": "image/png"
     }
   ],
   "start_url": "/blog/entries",
