@@ -5,6 +5,7 @@ description: コンテンツ表示のための機能についてまとめてい�
 date: 2021-07-31
 tags:
   - blog
+ogImageName: features
 ---
 
 ## タイトルです。
@@ -64,8 +65,8 @@ const fn = () => console.log("Hello World");
 
 横長の画像です。
 
-::: picture size=883x252 description="Lighthouse のスコアが全て 100 点" src="/public/contents/blog/entry/features/hanabi.png" :::
+::: picture size=883x252 description="Lighthouse のスコアが全て 100 点" src="/public/contents/features/hanabi.png" :::
 
 正方形の画像です。
 
-::: picture size=883x711 description="Lighthouse のスコアが全て 100 点" src="/public/contents/blog/entry/features/hanabi_all.png" :::
+::: picture size=883x711 description="Lighthouse のスコアが全て 100 点" src="/public/contents/features/hanabi_all.png" :::

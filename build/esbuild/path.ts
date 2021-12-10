@@ -1,6 +1,5 @@
 import { copy } from "cpx";
 import { readdir, lstat, rename } from "fs/promises";
-import { extname } from "path";
 
 export const getEntryPathname = async (root: string): Promise<string[]> => {
   const entries: string[] = [];

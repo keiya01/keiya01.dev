@@ -8,6 +8,6 @@ type Props = {
 
 export const Tag = ({ tag }: Props): string => {
   return html`<li class="${style.tagItem}">
-    <a class="${style.tagLink}" href="/blog/entries/${tag}">${tag}</a>
+    <a class="${style.tagLink}" href="/${tag}">${tag}</a>
   </li>`;
 };

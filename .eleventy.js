@@ -1,5 +1,6 @@
 const { readFileSync } = require("fs");
 const { resolve } = require("path");
+const { generateOGImage } = require("./scripts/dist/ogp");
 
 const loadJSON = (filePath) => {
   return JSON.parse(readFileSync(filePath, "utf8"));
@@ -139,6 +140,23 @@ const useMarkdown = () => {
 };
 
 module.exports = function (config) {
+  config.addShortcode("writeOGImage", async function (props) {
+    const imageFilename = `${props.filename}.jpg`;
+    const imageTitle = props.title;
+    const imageUseName = "@keiya01";
+
+    const outDir = resolve(__dirname, "./dist/site/public/ogp");
+
+    console.log("-----------------writeOGImage-----------------");
+    console.log(`path: ${outDir}/${imageFilename}`);
+    console.log(`with the title: ${imageTitle}`);
+
+    await generateOGImage(outDir, imageFilename, {
+      title: imageTitle,
+      username: imageUseName,
+    });
+  });
+
   config.addPassthroughCopy({
     public: "./public",
     "public/sw.js": "sw.js",

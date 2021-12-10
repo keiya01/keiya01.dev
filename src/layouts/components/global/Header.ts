@@ -15,7 +15,7 @@ type Props = {
 
 export const Header = ({
   title = "blog",
-  titleLink = "/blog/entries",
+  titleLink = "/",
 }: Props = {}): string => {
   const icons = [
     LinkIcon({
