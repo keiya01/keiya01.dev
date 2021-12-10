@@ -7,6 +7,7 @@ tags:
   - esbuild
   - 11ty
   - Jamstack
+ogImageName: fast-jamstack-with-11ty-and-esbuild
 ---
 
 ## Hello World
