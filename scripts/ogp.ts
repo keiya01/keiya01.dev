@@ -39,7 +39,7 @@ export const generateOGImage = async (
   };
   await init(module);
 
-  const h = 840;
+  const h = 630;
   const w = 1200;
 
   const windowStyle = WindowStyle.new();
