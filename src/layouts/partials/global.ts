@@ -1,5 +1,6 @@
 import { html } from "common-tags";
 import { ORIGIN } from "../../constants/origin";
+import { PROFILE_TWITTER_URL } from "../../constants/profile";
 import {
   loadPageScript,
   loadPublicResource,
@@ -31,6 +32,7 @@ const getJsonLD = (
         "@type": "BlogPosting",
         author: {
           "@type": "Person",
+          url: PROFILE_TWITTER_URL,
           name: "Keiya Sasaki",
           image: `${ORIGIN}/public/image/icon.png`,
         },
@@ -67,6 +69,7 @@ const getJsonLD = (
         "@type": "WebSite",
         author: {
           "@type": "Person",
+          url: PROFILE_TWITTER_URL,
           name: "Keiya Sasaki",
           image: `${ORIGIN}/public/image/icon.png`,
         },
