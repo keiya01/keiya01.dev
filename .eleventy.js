@@ -1,4 +1,4 @@
-const { readFileSync } = require("fs");
+const { readFileSync, existsSync } = require("fs");
 const { resolve } = require("path");
 const { generateOGImage } = require("./scripts/dist/ogp");
 
@@ -101,6 +101,17 @@ const usePicture = () => {
         const webpSrc = `${noExtensionSrc}.webp"`;
         const avifSrc = `${noExtensionSrc}.avif"`;
 
+        [webpSrc, avifSrc].map((src) => {
+          const path = resolve(__dirname, "." + src.slice(1, -1));
+          if (!existsSync(path)) {
+            throw new Error(`
+Could not found \`${path}\` in contents.
+You need to run \`yarn build:image\`.
+`);
+          }
+        });
+
+        // TODO: support multi dimensions
         const [width, height] = size.split("x");
 
         return `
@@ -143,7 +154,7 @@ module.exports = function (config) {
   config.addShortcode("writeOGImage", async function (props) {
     const imageFilename = `${props.filename}.jpg`;
     const imageTitle = props.title;
-    const imageUseName = "@keiya01";
+    const imageUseName = "Keiya Sasaki";
 
     const outDir = resolve(__dirname, "./dist/site/public/ogp");
 

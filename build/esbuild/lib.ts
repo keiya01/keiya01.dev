@@ -5,8 +5,8 @@ import {
   asyncCopy,
   getEntryPathname,
   rename11tyCSS,
-} from "./build/esbuild/path";
-import { generateManifest } from "./build/esbuild/manifest";
+} from "./path";
+import { generateManifest } from "./manifest";
 
 const outputRoot = "./dist";
 
