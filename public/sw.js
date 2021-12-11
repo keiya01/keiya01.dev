@@ -4,7 +4,7 @@ const cacheFiles = [
   "/layouts/pages/blog/entry.css",
   "/layouts/partials/global.css",
   "/lib/global.js",
-  "/public/css/prism.css",
+  "/public/css/prism.min.css",
   "/public/image/thumbnail_circle.jpg",
   "/public/image/thumbnail_circle.webp",
   "/public/image/github.png",

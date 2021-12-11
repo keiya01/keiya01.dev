@@ -1,11 +1,7 @@
 import { build as esbuild, BuildOptions } from "esbuild";
 import { vanillaExtractPlugin } from "@vanilla-extract/esbuild-plugin";
 
-import {
-  asyncCopy,
-  getEntryPathname,
-  rename11tyCSS,
-} from "./path";
+import { asyncCopy, getEntryPathname, rename11tyCSS } from "./path";
 import { generateManifest } from "./manifest";
 
 const outputRoot = "./dist";
