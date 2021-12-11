@@ -2,7 +2,7 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self'
+  Content-Security-Policy: default-src 'self'; style-src 'unsafe-inline'
   X-Frame-Options: Deny
   Cross-Origin-Resource-Policy: same-origin
   Cross-Origin-Opener-Policy: same-origin
