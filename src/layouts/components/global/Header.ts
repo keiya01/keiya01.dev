@@ -20,14 +20,14 @@ export const Header = ({
   const icons = [
     LinkIcon({
       href: PROFILE_GITHUB_URL,
-      src: "png/github.png",
+      src: "image/github.png",
       alt: "Github",
       width: 25,
       height: 25,
     }),
     LinkIcon({
       href: PROFILE_TWITTER_URL,
-      src: "svg/twitter.svg",
+      src: "image/twitter.svg",
       alt: "Twitter",
       width: 25,
       height: 25,

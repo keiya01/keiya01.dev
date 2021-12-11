@@ -10,11 +10,11 @@ export const Thumbnail = (): string => {
   return html`
     <picture class="${style.picture}">
       <source
-        srcset="${loadPublicResource(`/webp/${thumbnailName}.webp`)}"
+        srcset="${loadPublicResource(`/image/${thumbnailName}.webp`)}"
         type="image/webp"
       />
       <img
-        src="${loadPublicResource(`/jpg/${thumbnailName}.jpg`)}"
+        src="${loadPublicResource(`/image/${thumbnailName}.jpg`)}"
         alt="サムネイル"
         width="60"
         height="60"
