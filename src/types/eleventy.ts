@@ -12,6 +12,10 @@ type Collections = {
   all: Collection[];
 };
 
+type RenderData = {
+  title?: string;
+};
+
 export type EleventyShortCode = {
   writeOGImage: (props: { filename?: string; title?: string }) => Promise<void>;
 };
@@ -28,6 +32,8 @@ export type EleventyProps = {
   tag?: string;
   collections: Collections;
   ogImageAlt?: string;
+  modified?: string;
+  renderData?: RenderData;
 };
 
 export type EleventyData = Partial<EleventyProps>;

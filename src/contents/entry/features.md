@@ -3,6 +3,7 @@ layout: blog/entry
 title: このブログの機能について
 description: コンテンツ表示のための機能についてまとめています。
 date: 2021-07-31
+modified: 2021-07-31
 tags:
   - blog
 ogImageName: features

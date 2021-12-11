@@ -7,12 +7,74 @@ import {
   loadStyle,
 } from "../../helpers/subResourceHelper";
 import { EleventyProps, EleventyShortCode } from "../../types/eleventy";
+import { getFormattedDate } from "../../utils/date";
 import { Header } from "../components/global/Header";
 
 import * as style from "../partials/global.css";
 
 const getOGType = (layout: string) =>
-  layout.startsWith("blog") ? "article" : "website";
+  layout === "blog/entry" ? "article" : "website";
+
+const getJsonLD = (
+  isEntry: boolean,
+  data: {
+    title: string;
+    description: string;
+    ogImageName?: string;
+    publishedAt?: string;
+    modifiedAt?: string;
+  }
+) =>
+  isEntry
+    ? {
+        "@context": "https://schema.org/",
+        "@type": "BlogPosting",
+        author: {
+          "@type": "Person",
+          name: "Keiya Sasaki",
+          image: `${ORIGIN}/public/image/icon.png`,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Keiya Sasaki",
+          logo: {
+            "@type": "ImageObject",
+            url: `${ORIGIN}/public/image/icon.png`,
+          },
+        },
+        headline: data.title,
+        ...(data.ogImageName
+          ? { image: [`${ORIGIN}/entry/${data.ogImageName}`] }
+          : {}),
+        ...(data.publishedAt
+          ? {
+              datePublished: new Date(
+                getFormattedDate(data.publishedAt)
+              ).toISOString(),
+            }
+          : {}),
+        ...(data.modifiedAt
+          ? {
+              dateModified: new Date(
+                getFormattedDate(data.modifiedAt)
+              ).toISOString(),
+            }
+          : {}),
+        description: data.description,
+      }
+    : {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        author: {
+          "@type": "Person",
+          name: "Keiya Sasaki",
+          image: `${ORIGIN}/public/image/icon.png`,
+        },
+        description: data.description,
+        url: ORIGIN,
+      };
+
+const setTitle = (title: string) => `${title} - blog.keiya01.dev`;
 
 export const render = async function (
   this: EleventyShortCode,
@@ -24,13 +86,18 @@ export const render = async function (
     description,
     ogImageName,
     ogImageAlt,
+    page,
+    modified,
+    renderData,
   }: EleventyProps
 ): Promise<string> {
   const globalScript = loadPageScript("global");
   const pageScript = loadPageScript(layout);
   const pageStyle = loadPageStyle(layout);
 
-  const defaultTitle = "blog - Keiya Sasaki";
+  const isEntry = layout === "blog/entry";
+
+  const defaultTitle = "blog";
   const defaultDescription =
     "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸";
 
@@ -41,7 +108,7 @@ export const render = async function (
   return html`<!DOCTYPE html>
     <html lang="ja">
       <head>
-        <title>${title || defaultTitle}</title>
+        <title>${setTitle(renderData?.title || title || defaultTitle)}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
@@ -51,8 +118,14 @@ export const render = async function (
 
         <!-- === OGP meta === -->
         <meta name="og:type" content="${getOGType(layout)}" />
-        <meta name="og:url" content="${ORIGIN}/entry/${ogImageName}" />
-        <meta name="og:title" content="${title || defaultTitle}" />
+        <meta
+          name="og:url"
+          content="${isEntry ? `${ORIGIN}/entry/${ogImageName}` : ""}"
+        />
+        <meta
+          name="og:title"
+          content="${setTitle(renderData?.title || title || defaultTitle)}"
+        />
         <meta
           name="og:description"
           content="${description || defaultDescription}"
@@ -63,12 +136,29 @@ export const render = async function (
         />
         <meta
           property="og:image:alt"
-          content="${ogImageAlt || title || defaultTitle}"
+          content="${isEntry ? title : ogImageAlt || defaultTitle}"
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="${title || defaultTitle}" />
+        <meta
+          name="twitter:title"
+          content="${setTitle(renderData?.title || title || defaultTitle)}"
+        />
+
+        <!-- === Structured data === -->
+        <script type="application/ld+json">
+          ${JSON.stringify(
+            getJsonLD(isEntry, {
+              title: setTitle(renderData?.title || title || defaultTitle),
+              description: description || defaultDescription,
+              publishedAt: page.date,
+              modifiedAt: modified,
+              ogImageName,
+            })
+          )}
+        </script>
 
         <link rel="manifest" href="/manifest.json" />
+
         <link rel="stylesheet" href="${loadStyle("partials/global")}" />
         <link rel="stylesheet" href="${loadStyle(`pages/${layout}`)}" />
         ${pageStyle && html`<link rel="stylesheet" href="${pageStyle}" />`}
