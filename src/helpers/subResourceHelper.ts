@@ -2,7 +2,6 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import {
   LAYOUT_ENTRY_POINT,
-  LIB_FEATURE_ENTRY_POINT,
   LIB_PAGE_ENTRY_POINT,
   OUTPUT_DIST_DIR,
   SITE_LIB_ENTRY_POINT,
