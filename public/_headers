@@ -1,0 +1,27 @@
+/*
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'
+  X-Frame-Options: Deny
+  Cross-Origin-Resource-Policy: same-origin
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000
+
+/layouts/partials/*
+  Cache-Control: public, max-age=31536000
+
+/lib/*
+  Cache-Control: public, max-age=31536000
+
+/public/contents/*
+  Cache-Control: no-cache
+
+/public/css/*
+  Cache-Control: public, max-age=31536000
+
+/public/image/*
+  Cache-Control: public, max-age=31536000
+
+https://blog-3b2.pages.dev/*
+  X-Robots-Tag: noindex

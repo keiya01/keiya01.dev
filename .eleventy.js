@@ -172,6 +172,7 @@ module.exports = function (config) {
     public: "./public",
     "public/sw.js": "sw.js",
     "public/manifest.json": "manifest.json",
+    "public/_headers": "_headers",
   });
 
   config.setBrowserSyncConfig({

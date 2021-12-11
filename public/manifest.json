@@ -4,7 +4,7 @@
   "description": "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸",
   "icons": [
     {
-      "src": "public/icons/thumbnail_circle.png",
+      "src": "public/image/icon.png",
       "sizes": "400x400",
       "type": "image/png"
     }

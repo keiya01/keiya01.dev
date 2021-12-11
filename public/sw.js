@@ -5,11 +5,11 @@ const cacheFiles = [
   "/layouts/partials/global.css",
   "/lib/global.js",
   "/public/css/prism.min.css",
-  "/public/jpg/thumbnail_circle.jpg",
-  "/public/webp/thumbnail_circle.webp",
-  "/public/png/github.png",
-  "/public/svg/twitter.svg",
-  "/public/icons/thumbnail_circle.png",
+  "/public/image/thumbnail_circle.jpg",
+  "/public/image/thumbnail_circle.webp",
+  "/public/image/github.png",
+  "/public/image/twitter.svg",
+  "/public/image/icon.png",
 ];
 
 self.addEventListener("install", (e) => {
