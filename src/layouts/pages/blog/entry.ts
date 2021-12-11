@@ -8,7 +8,7 @@ import * as style from "./entry.css";
 
 export const data: EleventyData = {
   layout: "global",
-  publics: ["css/prism.css"],
+  publics: ["css/prism.min.css"],
 };
 
 export const render = ({
