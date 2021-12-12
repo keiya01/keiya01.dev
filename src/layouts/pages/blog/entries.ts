@@ -31,7 +31,9 @@ export const render = ({ collections, tag }: EleventyProps): string => {
         </div>
       </div>
     </aside>
-    <aside class="${style.ad}">${GoogleAd({ slot: "4614145857" })}</aside>
+    <aside>
+      ${GoogleAd({ slot: "4614145857", format: "horizontal", height: 120 })}
+    </aside>
     <main>
       <ul class="${style.list}">
         ${entries.map((entry) =>

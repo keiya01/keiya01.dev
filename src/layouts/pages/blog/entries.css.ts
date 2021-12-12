@@ -6,11 +6,6 @@ export const list = style({
   margin: 0,
 });
 
-export const ad = style({
-  margin: "50px auto 0",
-  minHeight: 280,
-});
-
 export const profile = style({
   maxWidth: vars.content_width,
   width: "100%",

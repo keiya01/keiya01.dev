@@ -13,6 +13,7 @@ export const darkVars = {
   background_code: "#141414",
   background_tag: "#570099",
   background_header: "#1e0036",
+  background_low: "#67616b",
 
   border_blockquote: "#9684a3",
 
@@ -33,6 +34,7 @@ export const lightVars = {
   background_base: "#fff",
   background_tag: "#d6a1ff",
   background_code: "#272329",
+  background_low: "#b8b5ba",
   border_blockquote: "#64566e",
   border_boundary_color: "#c4bdc9",
 };
