@@ -147,6 +147,12 @@ export const render = async function (
           content="${setTitle(renderData?.title || title || defaultTitle)}"
         />
 
+        <!-- Google Search Console -->
+        <meta
+          name="google-site-verification"
+          content="-GnrzTzYxwPVlrMuDuGJSf-03pfDSp0xNCrj0mIpfwM"
+        />
+
         <!-- === Structured data === -->
         <script type="application/ld+json">
           ${JSON.stringify(
@@ -177,6 +183,9 @@ export const render = async function (
       <body>
         ${Header()}
         <div class="${style.wrapper}">${content}</div>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </body>
     </html>`;
 };
