@@ -177,6 +177,9 @@ export const render = async function (
       <body>
         ${Header()}
         <div class="${style.wrapper}">${content}</div>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </body>
     </html>`;
 };
