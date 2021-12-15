@@ -22,11 +22,11 @@ const module = readFileSync(
 );
 
 const mplus1 = Uint8Array.from(
-  readFileSync(path.resolve(__dirname, "../../fonts/Mplus1-Black.ttf"))
+  readFileSync(path.resolve(__dirname, "../../public/fonts/Mplus1-Black.ttf"))
 );
 
 const robot = Uint8Array.from(
-  readFileSync(path.resolve(__dirname, "../../fonts/Roboto-Light.ttf"))
+  readFileSync(path.resolve(__dirname, "../../public/fonts/Roboto-Light.ttf"))
 );
 
 export const generateOGImage = async (

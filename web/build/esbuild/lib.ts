@@ -55,7 +55,13 @@ const build = async () => {
 };
 
 const run = async () => {
-  await Promise.all([build()]);
+  await Promise.all([
+    build(),
+    asyncCopy(
+      "./node_modules/og_image_writer/wasm_bg.wasm",
+      "./dist/site/public/wasm/og_imagse_writer"
+    ),
+  ]);
 };
 
 run();
