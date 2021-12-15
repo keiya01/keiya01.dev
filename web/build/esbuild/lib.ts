@@ -59,7 +59,7 @@ const run = async () => {
     build(),
     asyncCopy(
       "./node_modules/og_image_writer/wasm_bg.wasm",
-      "./dist/site/public/wasm/og_imagse_writer"
+      "./dist/site/public/wasm/og_image_writer"
     ),
   ]);
 };
