@@ -60,8 +60,6 @@ const fn = () => console.log("Hello World");
 - 変換されたファイルは `public/contents/blog_filename` に格納されます。
 - 2 回目以降はこれらの画像の存在を確認し、存在していれば画像のビルドをスキップします。
 
-### 花火の画像です。
-
 横長の画像です。
 
 ::: picture size=1200x630 description="Lighthouse のスコアが全て 100 点" src="/public/contents/entry/features/hanabi.png" :::

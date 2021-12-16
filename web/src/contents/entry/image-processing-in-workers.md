@@ -52,12 +52,6 @@ Edge 上で JavaScript のような言語を動かせることで、地理的に
 
 そのほかの部分の詳細については[公式ドキュメント](https://developers.cloudflare.com/workers/)を参照してください。
 
-## Squoosh を使ってみる
-
-結果として Squoosh はまだ Cloudflare Workers では動きませんでした。詳細は [[CLI] Make it run on the web #1084](https://github.com/GoogleChromeLabs/squoosh/issues/1084) で確認できますが、Node.js の worker_thread を置き換えられれば web で動くようになるぽいです。
-
-これが実現できれば色々なことができるようになりそうで楽しみです。
-
 ## OG 画像を生成してみる
 
 ### 前提
