@@ -1,7 +1,7 @@
 ---
 layout: blog/entry
-title: Cloudflare Workers で画像処理を試す
-description: Cloudflare Workers で OG 画像の生成や Squoosh を使った画像処理を試します。
+title: Cloudflare Workers で OG 画像を生成する
+description: Cloudflare Workers で OG 画像の生成試します。
 date: 2021-12-17
 modified: 2021-12-17
 tags:
@@ -119,7 +119,7 @@ const font = await fetch(`https://example.com/font.ttf`)
 
 まずは window を作成します。window を作成するには `OGImageWriter.new()` を使用します。  
 また、window のスタイルを定義するために `WindowStyle` を使用します。  
-`WindowStyle`で扱えるプロパティについては[ドキュメント](https://www.npmjs.com/package/og_image_writer#window-style)を参照してください
+`WindowStyle`で扱えるプロパティについては[ドキュメント](https://www.npmjs.com/package/og_image_writer#window-style)を参照してください。
 
 ```ts
 const h = 630;
@@ -139,7 +139,7 @@ const window = OGImageWriter.new(windowStyle);
 
 clear したい場合は`FontContext.clear()`を使用します。
 
-グローバルな font を設定せず直接 text や textarea 要素に font を指定することもできます。  
+グローバルな font を設定せず直接 text や textarea 要素に font を指定できます。  
 注意点としては文字列を画像に描画したい場合、font がないとエラーになります。
 
 ```ts
@@ -221,4 +221,4 @@ return new Response(data, {
 
 **余談**  
 実は OG 画像の生成以外にも Squoosh を動かそうとしてみたのですが、まだ対応しておらず実装できませんでした。
-[この issue](https://github.com/GoogleChromeLabs/squoosh/issues/1084) が解決すれば使えるようになるかもしれません。
+[この issue](https://github.com/GoogleChromeLabs/squoosh/issues/1084) が解決すれば使えるようになるはずです。
