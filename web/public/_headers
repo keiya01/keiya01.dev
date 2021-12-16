@@ -22,5 +22,8 @@
 /public/image/*
   Cache-Control: public, max-age=31536000
 
+/public/fonts/*
+  Cache-Control: public, max-age=31536000
+
 https://blog-3b2.pages.dev/*
   X-Robots-Tag: noindex
