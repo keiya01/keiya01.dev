@@ -101,6 +101,10 @@ const font = await fetch(`https://example.com/font.ttf`)
 
 `og_image_writer` には font を `Uint8Array` として渡さなければならないので `Uint8Array` に変換します。
 
+font は滅多に変更されないデータなのでキャッシュの設定をしておくと効果的です。
+
+[Cloudflare Workers では fetch したリソースのキャッシュ方法を設定することができる](https://developers.cloudflare.com/workers/examples/cache-using-fetch)ので、リソースのキャッシュ方法を上書きしたい場合は使うと良さそうです。
+
 **3. OG 画像を生成する**
 
 次に OG 画像を生成します。
