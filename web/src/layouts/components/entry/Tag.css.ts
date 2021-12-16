@@ -18,6 +18,7 @@ export const tagLink = style({
   borderRadius: 5,
   display: "inline-block",
   padding: "1px 3px",
+  color: vars.color_base,
   ":focus": {
     boxShadow: vars.outline_box_shadow_inset,
   },

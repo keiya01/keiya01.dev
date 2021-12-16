@@ -54,6 +54,10 @@ globalStyle("main", {
   boxSizing: "border-box",
 });
 
+/**
+ * TODO: 記事用のstyleをentry.cssに移動する
+ */
+
 globalStyle("h2, h3, h4", {
   margin: "50px 0 30px",
   width: "100%",
@@ -72,12 +76,15 @@ globalStyle("h4", {
 });
 
 globalStyle(":is(h2, h3, h4) > a", {
-  padding: "0 0 6px",
   width: "100%",
   color: vars.color_base,
-  borderBottom: `1px solid ${vars.color_base}`,
   textDecoration: "none",
   display: "inline-block",
+});
+
+globalStyle("h2 > a", {
+  padding: "0 0 6px",
+  borderBottom: `1px solid ${vars.color_base}`,
 });
 
 globalStyle(":is(h2, h3, h4) > a:hover", {
@@ -89,11 +96,11 @@ globalStyle(":is(h2, h3, h4) > a:hover", {
   },
 });
 
-globalStyle("p > a", {
+globalStyle(":not(h2, h3, h4) > a", {
   color: vars.color_link,
 });
 
-globalStyle("p > a:hover", {
+globalStyle(":not(h2, h3, h4) > a:hover", {
   "@media": {
     "(hover: hover)": {
       color: vars.color_active_link,
@@ -101,30 +108,8 @@ globalStyle("p > a:hover", {
   },
 });
 
-globalStyle("pre, code", {
-  background: vars.background_code,
-});
-
-globalStyle("pre", {
-  padding: 10,
-  borderRadius: 5,
-  overflow: "auto",
-});
-
-globalStyle("code", {
-  borderRadius: 3,
-  padding: "1px 4px",
-  margin: "0 2px",
-  color: vars.color_code,
-});
-
 globalStyle("ul", {
   padding: 0,
-  marginLeft: 20,
-});
-
-globalStyle("li", {
-  margin: "5px 0",
 });
 
 globalStyle("a", {
@@ -143,25 +128,6 @@ globalStyle(":is(a, button):focus", {
 
 globalStyle(":is(a, button):focus:not(:focus-visible)", {
   boxShadow: "none",
-});
-
-globalStyle("blockquote", {
-  margin: "2em 40px",
-  borderLeft: `5px solid ${vars.border_blockquote}`,
-  padding: "10px 0 10px 20px",
-});
-
-globalStyle("p img", {
-  maxWidth: "100%",
-  height: "auto",
-  objectFit: "contain",
-});
-
-globalStyle("p img", {
-  display: "block",
-  border: `1px solid ${vars.border_boundary_color}`,
-  borderRadius: 10,
-  margin: "20px auto",
 });
 
 export const wrapper = style({

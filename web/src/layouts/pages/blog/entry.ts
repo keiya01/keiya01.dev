@@ -25,7 +25,7 @@ export const render = ({
           <time datetime="${page.date}">${getFormattedDate(page.date)}</time>
           <div class="${style.tagList}">${TagList({ tags })}</div>
         </header>
-        <section>${content}</section>
+        <section class="${style.content}">${content}</section>
       </article>
     </main>
   `;
