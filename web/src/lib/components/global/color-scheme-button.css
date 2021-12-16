@@ -20,7 +20,7 @@ color-scheme-button[aria-disabled="true"] {
 
 color-scheme-button[aria-disabled="true"]::before {
   content: "";
-  display: inline-block;
+  display: inline-flex;
   border-radius: 50%;
   width: calc(var(--color-scheme-button-icon-size) + 5px);
   height: var(--color-scheme-button-icon-size);

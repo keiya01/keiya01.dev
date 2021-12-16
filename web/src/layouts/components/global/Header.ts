@@ -42,7 +42,7 @@ export const Header = ({
             <a class="${style.title}" href="${titleLink}">${title}</a>
           </li>
           ${icons.map((icon) => html`<li class="${style.item}">${icon}</li>`)}
-          <li class="${style.item}">
+          <li class="${style.item} ${style.schemeButton}">
             <color-scheme-button
               aria-disabled="true"
               icon-size="24"

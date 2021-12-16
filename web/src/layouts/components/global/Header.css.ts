@@ -39,6 +39,10 @@ globalStyle(`${item} > a`, {
   color: vars.color_header,
 });
 
+export const schemeButton = style({
+  display: "inline-flex",
+});
+
 export const titleWrapper = composeStyles(
   item,
   style({

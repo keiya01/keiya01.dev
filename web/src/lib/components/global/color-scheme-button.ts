@@ -111,7 +111,7 @@ class ColorSchemeButton extends HTMLElement {
   getStyle(): string {
     return `
       :host {
-        display: inline-block;
+        display: inline-flex;
       }
 
       button {
