@@ -16,9 +16,7 @@ type RenderData = {
   title?: string;
 };
 
-export type EleventyShortCode = {
-  writeOGImage: (props: { filename?: string; title?: string }) => Promise<void>;
-};
+export type EleventyShortCode = unknown;
 
 export type EleventyProps = {
   title?: string;

@@ -1,5 +1,5 @@
 import { html } from "common-tags";
-import { ORIGIN } from "../../constants/origin";
+import { ORIGIN, WORKER_ORIGIN } from "../../constants/origin";
 import { PROFILE_TWITTER_URL } from "../../constants/profile";
 import {
   loadPageScript,
@@ -104,10 +104,6 @@ export const render = async function (
   const defaultDescription =
     "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸";
 
-  if (ogImageName) {
-    await this.writeOGImage({ filename: ogImageName, title });
-  }
-
   return html`<!DOCTYPE html>
     <html lang="ja">
       <head>
@@ -135,7 +131,7 @@ export const render = async function (
         />
         <meta
           property="og:image"
-          content="${ORIGIN}/public/ogp/${ogImageName}.jpg"
+          content="${WORKER_ORIGIN}/public/ogp/${ogImageName}.jpg"
         />
         <meta
           property="og:image:alt"

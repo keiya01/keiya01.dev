@@ -1,6 +1,5 @@
 const { readFileSync, existsSync } = require("fs");
 const { resolve } = require("path");
-const { generateOGImage } = require("./scripts/dist/ogp");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 const loadJSON = (filePath) => {
@@ -148,23 +147,6 @@ const useMarkdown = () => {
 };
 
 module.exports = function (config) {
-  config.addShortcode("writeOGImage", async function (props) {
-    const imageFilename = `${props.filename}.jpg`;
-    const imageTitle = props.title;
-    const imageUseName = "Keiya Sasaki";
-
-    const outDir = resolve(__dirname, "./dist/site/public/ogp");
-
-    console.log("-----------------writeOGImage-----------------");
-    console.log(`path: ${outDir}/${imageFilename}`);
-    console.log(`with the title: ${imageTitle}`);
-
-    await generateOGImage(outDir, imageFilename, {
-      title: imageTitle,
-      username: imageUseName,
-    });
-  });
-
   config.addPlugin(syntaxHighlight);
 
   config.addPassthroughCopy({
