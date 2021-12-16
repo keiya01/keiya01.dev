@@ -5,9 +5,9 @@ description: Cloudflare Workers で OG 画像の生成試します。
 date: 2021-12-17
 modified: 2021-12-17
 tags:
-  - worker
+  - Cloudflare Workers
   - image processing
-ogImageName: image-processing-in-workers
+ogImageName: og-image-in-workers
 ---
 
 ## Overview
