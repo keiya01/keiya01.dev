@@ -82,7 +82,7 @@ wasm を使用するには、 webpack で wasm をバンドルに含めてしま
 
 [wrangler](https://github.com/cloudflare/wrangler) は Cloudflare Workers が用意してくれている CLI です。
 
-今回は wasm modules に wasm ファイルを指定する方法で利用します。
+今回は wasm modules に wasm ファイルを指定する方法で利用します。  
 wasm modules を利用するには `wrangler.toml` で wasm_modules に wasm ファイルのパスを指定します。
 
 ```toml
@@ -123,8 +123,8 @@ const font = await fetch(`https://example.com/font.ttf`)
 
 今回は window と text を使います。
 
-まずは window を作成します。window を作成するには `OGImageWriter.new()` を使用します。
-また、window のスタイルを定義するために `WindowStyle` を使用します。
+まずは window を作成します。window を作成するには `OGImageWriter.new()` を使用します。  
+また、window のスタイルを定義するために `WindowStyle` を使用します。  
 `WindowStyle`で扱えるプロパティについては[ドキュメント](https://www.npmjs.com/package/og_image_writer#window-style)を参照してください
 
 ```ts
@@ -157,7 +157,7 @@ const fontContext = FontContext.new();
 fontContext.push(mplus1);
 ```
 
-次に text 要素を描画してみます。text 要素を描画するには `window.set_text()` 関数を使います。
+次に text 要素を描画してみます。text 要素を描画するには `window.set_text()` 関数を使います。  
 また、text の要素のスタイルを定義するために`Style`を使用します。
 
 `Style`で扱えるプロパティは[ドキュメント](https://www.npmjs.com/package/og_image_writer#style)を参照してください。
@@ -192,14 +192,14 @@ const otherFont = await fetch(`https://example.com/other.ttf`)
 window.set_text("author", usernameStyle, otherFont);
 ```
 
-これらを描画するために`window.paint()`を使用します。
+これらを描画するために`window.paint()`を使用します。  
 これを実行しない場合、画像には何も描画されません。
 
 ```ts
 window.paint();
 ```
 
-最後に画像からデータを取り出してレスポンスとして返します。
+最後に画像からデータを取り出してレスポンスとして返します。  
 データを取得するには`encode`を使用します。
 
 ```ts
@@ -220,12 +220,11 @@ return new Response(data, {
 
 ## まとめ
 
-初めて Cloudflare Workers を使ってみましたが簡単に利用できました。
+初めて Cloudflare Workers を使ってみましたが簡単に利用できました。  
 開発環境も考慮されており、ローカルで開発できるように工夫されているので体験もよかったです。
 
 ぜひ試してみてください。
 
-**余談**
-
+**余談**  
 実は OG 画像の生成以外にも Squoosh を動かそうとしてみたのですが、まだ対応しておらず実装できませんでした。
 [この issue](https://github.com/GoogleChromeLabs/squoosh/issues/1084) が解決すれば使えるようになるかもしれません。
