@@ -1,6 +1,7 @@
 const { readFileSync, existsSync } = require("fs");
 const { resolve } = require("path");
 const { generateOGImage } = require("./scripts/dist/ogp");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 const loadJSON = (filePath) => {
   return JSON.parse(readFileSync(filePath, "utf8"));
@@ -132,16 +133,12 @@ You need to run \`yarn build:image\`.
 
 const useMarkdown = () => {
   const markdownIt = require("markdown-it");
-  const prism = require("prismjs");
   const anchor = require("markdown-it-anchor");
   const container = require("markdown-it-container");
 
   const options = {
     html: true,
-    breaks: true,
-    highlight: (str, lang) => {
-      return prism.highlight(str.trim(), prism.languages[lang], lang);
-    },
+    breaks: false,
   };
   return markdownIt(options)
     .use(anchor, {
@@ -167,6 +164,8 @@ module.exports = function (config) {
       username: imageUseName,
     });
   });
+
+  config.addPlugin(syntaxHighlight);
 
   config.addPassthroughCopy({
     public: "./public",
