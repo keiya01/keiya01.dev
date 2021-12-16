@@ -15,7 +15,8 @@ export const nav = style({
   maxWidth: vars.content_width,
   width: "100%",
   height: "100%",
-  margin: "0 20px",
+  padding: "0 20px",
+  boxSizing: "border-box",
 });
 
 export const list = style({
