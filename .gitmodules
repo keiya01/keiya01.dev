@@ -1,0 +1,3 @@
+[submodule "worker.keiya01.dev"]
+	path = worker.keiya01.dev
+	url = git@github.com:keiya01/worker.keiya01.dev.git
