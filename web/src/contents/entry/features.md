@@ -6,7 +6,7 @@ date: 2021-07-31
 modified: 2021-07-31
 tags:
   - blog
-ogImageName: features
+entryId: features
 ---
 
 ## タイトルです。

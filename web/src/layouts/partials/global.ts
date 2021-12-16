@@ -21,7 +21,7 @@ const getJsonLD = (
   data: {
     title: string;
     description: string;
-    ogImageName?: string;
+    entryId?: string;
     publishedAt?: string;
     modifiedAt?: string;
   }
@@ -45,9 +45,7 @@ const getJsonLD = (
           },
         },
         headline: data.title,
-        ...(data.ogImageName
-          ? { image: [`${ORIGIN}/entry/${data.ogImageName}`] }
-          : {}),
+        ...(data.entryId ? { image: [`${ORIGIN}/entry/${data.entryId}`] } : {}),
         ...(data.publishedAt
           ? {
               datePublished: new Date(
@@ -87,7 +85,7 @@ export const render = async function (
     content,
     publics,
     description,
-    ogImageName,
+    entryId,
     ogImageAlt,
     page,
     modified,
@@ -119,7 +117,7 @@ export const render = async function (
         <meta name="og:type" content="${getOGType(layout)}" />
         <meta
           name="og:url"
-          content="${isEntry ? `${ORIGIN}/entry/${ogImageName}` : ""}"
+          content="${isEntry ? `${ORIGIN}/entry/${entryId}` : ""}"
         />
         <meta
           name="og:title"
@@ -131,7 +129,7 @@ export const render = async function (
         />
         <meta
           property="og:image"
-          content="${WORKER_ORIGIN}/public/ogp/${ogImageName}.jpg"
+          content="${WORKER_ORIGIN}/public/ogp/${entryId}.jpg"
         />
         <meta
           property="og:image:alt"
@@ -157,7 +155,7 @@ export const render = async function (
               description: description || defaultDescription,
               publishedAt: page.date,
               modifiedAt: modified,
-              ogImageName,
+              entryId,
             })
           )}
         </script>

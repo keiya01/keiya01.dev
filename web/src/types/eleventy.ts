@@ -21,7 +21,7 @@ export type EleventyShortCode = unknown;
 export type EleventyProps = {
   title?: string;
   description?: string;
-  ogImageName?: string;
+  entryId?: string;
   content: string;
   page: PageData;
   layout: string; // This property include page name.

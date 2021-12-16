@@ -7,7 +7,7 @@ modified: 2021-12-17
 tags:
   - Cloudflare Workers
   - image processing
-ogImageName: og-image-in-workers
+entryId: og-image-in-workers
 ---
 
 ## Overview
