@@ -36,7 +36,7 @@ export const render = ({ collections, tag }: EleventyProps): string => {
     </aside>
     <main>
       <ul class="${style.list}">
-        ${entries.map((entry) =>
+        ${entries.reverse().map((entry) =>
           ListItem({
             date: entry.data.page.date,
             description: entry.data.description,
