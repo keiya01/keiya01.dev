@@ -62,11 +62,9 @@ const fn = () => console.log("Hello World");
 
 ### 花火の画像です。
 
-画像の埋め込みはマクロでやってもいいな。
-
 横長の画像です。
 
-::: picture size=883x252 description="Lighthouse のスコアが全て 100 点" src="/public/contents/entry/features/hanabi.png" :::
+::: picture size=1200x630 description="Lighthouse のスコアが全て 100 点" src="/public/contents/entry/features/hanabi.png" :::
 
 正方形の画像です。
 

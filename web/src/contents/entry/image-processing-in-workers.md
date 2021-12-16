@@ -214,7 +214,9 @@ return new Response(data, {
 });
 ```
 
-これで OG 画像が返ってくるはずです。
+これで下のような OG 画像が返ってくるはずです。
+
+::: picture size=883x252 description="Lighthouse のスコアが全て 100 点" src="/public/contents/entry/image-processing-in-workers/ogp.jpeg" :::
 
 ## まとめ
 

@@ -107,7 +107,7 @@ const usePicture = () => {
           if (!existsSync(path)) {
             throw new Error(`
 Could not found \`${path}\` in contents.
-You need to run \`yarn build:image\`.
+You need to run \`yarn build:img\`.
 `);
           }
         });
