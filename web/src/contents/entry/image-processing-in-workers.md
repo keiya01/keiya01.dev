@@ -189,7 +189,7 @@ usernameStyle.right = 50;
 const otherFont = await fetch(`https://example.com/other.ttf`)
   .then((res) => res.arrayBuffer())
   .then((buf) => new Uint8Array(buf));
-window.set_text(data.username, usernameStyle, otherFont);
+window.set_text("author", usernameStyle, otherFont);
 ```
 
 これらを描画するために`window.paint()`を使用します。
