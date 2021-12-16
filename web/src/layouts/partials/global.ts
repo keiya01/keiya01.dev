@@ -129,7 +129,7 @@ export const render = async function (
         />
         <meta
           property="og:image"
-          content="${WORKER_ORIGIN}/public/ogp/${entryId}.jpg"
+          content="${WORKER_ORIGIN}/public/ogp/${entryId}.jpeg"
         />
         <meta
           property="og:image:alt"
