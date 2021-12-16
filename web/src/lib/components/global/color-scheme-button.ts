@@ -1,3 +1,8 @@
+import {
+  getDataFromLocalStorage,
+  setDataToLocalStorage,
+} from "../../fundamentals/localstrage";
+
 const DataColorScheme = "data-color-scheme";
 
 type ColorSchemeUnion = "dark" | "light";
@@ -26,10 +31,10 @@ const toggleColorScheme = (event: Event) => {
   const currentColor = getCurrentColorScheme(
     html.getAttribute(DataColorScheme) || ""
   );
-  html.setAttribute(
-    DataColorScheme,
-    getNextColorScheme(currentColor === ColorScheme.dark)
-  );
+  const nextColor = getNextColorScheme(currentColor === ColorScheme.dark);
+  html.setAttribute(DataColorScheme, nextColor);
+
+  setDataToLocalStorage("theme", nextColor);
 };
 
 class ColorSchemeButton extends HTMLElement {
@@ -43,11 +48,19 @@ class ColorSchemeButton extends HTMLElement {
     this.render();
   }
 
-  connectedCallback(): void {
-    const isLight = window.matchMedia(
-      `(prefers-color-scheme: ${ColorScheme.light})`
-    ).matches;
-    this.checked = !isLight;
+  async connectedCallback(): Promise<void> {
+    const currentColor = await getDataFromLocalStorage("theme");
+
+    const isDark = currentColor
+      ? currentColor === ColorScheme.dark
+      : window.matchMedia(`(prefers-color-scheme: ${ColorScheme.dark})`)
+          .matches;
+
+    if (currentColor) {
+      document.documentElement.setAttribute(DataColorScheme, currentColor);
+    }
+
+    this.checked = isDark;
 
     if (!this.disabled) {
       throw new Error(
