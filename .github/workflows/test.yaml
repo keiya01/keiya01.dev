@@ -25,11 +25,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies 📦
-        working-directory: ./web
+        working-directory: ./blog.keiya01.dev
         run: yarn install --frozen-lockfile
       - name: Run lint
-        working-directory: ./web
+        working-directory: ./blog.keiya01.dev
         run: yarn lint
       - name: Run build
-        working-directory: ./web
+        working-directory: ./blog.keiya01.dev
         run: yarn build
