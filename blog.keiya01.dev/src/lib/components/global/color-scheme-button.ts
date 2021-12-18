@@ -58,6 +58,11 @@ class ColorSchemeButton extends HTMLElement {
 
     if (currentColor) {
       document.documentElement.setAttribute(DataColorScheme, currentColor);
+    } else {
+      document.documentElement.setAttribute(
+        DataColorScheme,
+        getNextColorScheme(isDark)
+      );
     }
 
     this.checked = isDark;
