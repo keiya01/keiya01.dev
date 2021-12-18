@@ -45,7 +45,7 @@ Edge 上で JavaScript のような言語を動かせることで、地理的に
 
 ## セットアップ
 
-セットアップ周りは [wrangler](https://github.com/cloudflare/wrangler) という Cloudflare が作っている CLI がやってくれるので難しくないのです。
+セットアップ周りは [wrangler](https://github.com/cloudflare/wrangler) という Cloudflare が作っている CLI がやってくれるので難しくないです。
 
 一点詰まった点としては、 `wrangler.toml` の `account_id` がセンシティブなものなのか分からず戸惑ってしまいました。  
 [こちらの issue](https://github.com/cloudflare/wrangler-action/issues/17) にある通り、 `account_id` は公開されても問題ない ID のようでした。
