@@ -37,6 +37,23 @@ const toggleColorScheme = (event: Event) => {
   setDataToLocalStorage("theme", nextColor);
 };
 
+const setInitialColorScheme = async (matchDark: boolean) => {
+  const currentColor = await getDataFromLocalStorage("theme");
+
+  const isDark = currentColor ? currentColor === ColorScheme.dark : matchDark;
+
+  if (currentColor) {
+    document.documentElement.setAttribute(DataColorScheme, currentColor);
+  } else {
+    document.documentElement.setAttribute(
+      DataColorScheme,
+      isDark ? ColorScheme.dark : ColorScheme.light
+    );
+  }
+
+  return isDark;
+};
+
 class ColorSchemeButton extends HTMLElement {
   constructor() {
     super();
@@ -49,23 +66,13 @@ class ColorSchemeButton extends HTMLElement {
   }
 
   async connectedCallback(): Promise<void> {
-    const currentColor = await getDataFromLocalStorage("theme");
-
-    const isDark = currentColor
-      ? currentColor === ColorScheme.dark
-      : window.matchMedia(`(prefers-color-scheme: ${ColorScheme.dark})`)
-          .matches;
-
-    if (currentColor) {
-      document.documentElement.setAttribute(DataColorScheme, currentColor);
-    } else {
-      document.documentElement.setAttribute(
-        DataColorScheme,
-        getNextColorScheme(isDark)
-      );
-    }
-
-    this.checked = isDark;
+    const mql = window.matchMedia(
+      `(prefers-color-scheme: ${ColorScheme.dark})`
+    );
+    this.checked = await setInitialColorScheme(mql.matches);
+    mql.addEventListener("change", async (e) => {
+      this.checked = await setInitialColorScheme(e.matches);
+    });
 
     if (!this.disabled) {
       throw new Error(
