@@ -35,6 +35,7 @@ globalStyle("body", {
   minHeight: "100%",
   height: "100%",
   width: "100%",
+  margin: 0,
   background: vars.background_base,
   transition: "background ease-in 0.1s",
   "@media": {
