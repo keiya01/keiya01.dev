@@ -224,11 +224,12 @@ return new Response(data, {
 
 ## Performance
 
-キャッシュがない時は 700ms ~ 1000ms 程で表示されます。キャッシュがある時は 200ms 程で表示されます。
+キャッシュがない時は 700ms ~ 1000ms 程で表示されます。キャッシュがある時は 200ms 程で表示されます。  
+worker で動かせるので Cloud Functions とかで動かすよりは速いはずです。
 
 ## メリットと課題
 
-OGP 生成の方法としては Headless browser で生成する方法と node-canvas で生成する方法があります。
+OGP 生成の方法としては Headless browser で生成する方法と node-canvas で生成する方法があります。  
 これらとの Performance の比較はできていませんが、以下の点で有利な点があります。
 
 - wasm を動かせればどこでも動く
@@ -244,9 +245,9 @@ OGP 生成の方法としては Headless browser で生成する方法と node-c
 初めて Cloudflare Workers を使ってみましたが簡単に利用できました。  
 開発環境も考慮されており、ローカルで開発できるように工夫されているので体験もよかったです。
 
-og_image_writer については、まだまだ使える API が少なくデザイン的に細かい所までこだわるのが難しかったりします。
+og_image_writer については、まだまだ使える API が少なくデザイン的に細かい所までこだわるのが難しかったりします。  
 使いたい機能のリクエストなどあれば[issue](https://github.com/keiya01/og_image_writer/issues)までお願いします。
 
 **余談**  
-実は OG 画像の生成以外にも Squoosh を動かそうとしてみたのですが、まだ対応しておらず実装できませんでした。
+実は OG 画像の生成以外にも Squoosh を動かそうとしてみたのですが、まだ対応しておらず実装できませんでした。  
 [この issue](https://github.com/GoogleChromeLabs/squoosh/issues/1084) が解決すれば使えるようになるはずです。
