@@ -32,7 +32,6 @@ globalStyle("html[data-color-scheme='light']", {
 });
 
 globalStyle("body", {
-  margin: 0,
   minHeight: "100%",
   height: "100%",
   width: "100%",
@@ -131,5 +130,5 @@ globalStyle(":is(a, button):focus:not(:focus-visible)", {
 });
 
 export const wrapper = style({
-  margin: "0 20px",
+  padding: `${vars.header_height} 20px 0`,
 });

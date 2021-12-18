@@ -3,20 +3,23 @@ import { vars } from "../../partials/theme.css";
 
 export const header = style({
   width: "100%",
-  height: 60,
+  height: vars.header_height,
   background: vars.background_header,
   color: vars.color_header,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  boxSizing: "border-box",
+  padding: "0 20px",
 });
 
 export const nav = style({
   maxWidth: vars.content_width,
   width: "100%",
   height: "100%",
-  padding: "0 20px",
-  boxSizing: "border-box",
 });
 
 export const list = style({

@@ -23,6 +23,7 @@ export const darkVars = {
   outline_box_shadow_inset: "0 0 0 3px #870144 inset",
 
   content_width: "680px",
+  header_height: "60px",
 };
 
 export const lightVars = {
