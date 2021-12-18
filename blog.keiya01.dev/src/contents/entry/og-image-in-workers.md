@@ -2,11 +2,11 @@
 layout: blog/entry
 title: Cloudflare Workers で OG 画像を生成する
 description: Cloudflare Workers で OG 画像の生成試します。
-date: 2021-12-17
-modified: 2021-12-17
+date: 2021-12-18
+modified: 2021-12-18
 tags:
-  - Cloudflare Workers
-  - image processing
+  - workers
+  - 画像処理
 entryId: og-image-in-workers
 ---
 
