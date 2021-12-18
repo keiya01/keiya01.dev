@@ -58,6 +58,12 @@ Edge 上で JavaScript のような言語を動かせることで、地理的に
 
 Cloudflare Workers 上で OG 画像を生成するにあたり [og_image_writer](https://github.com/keiya01/og_image_writer) という自作のライブラリを使用してみます。これを使うことで改行処理や背景画像を設定したりできます。
 
+og_image_writer は Rust で書かれており、[wasm-pack](https://github.com/rustwasm/wasm-pack)で生成される wasm をラップしてくれる JavaScript をそのまま npm で配信しています。
+
+JavaScript 以外で扱いたい場合は、[og_image_writer](https://github.com/keiya01/og_image_writer)のコードから wasm を生成して使うことができます。
+
+また Cloudflare Workers では Rust も動かすことができます。[og_image_writer](https://github.com/keiya01/og_image_writer)の crate(Rust の npm のようなもの)を読み込んでそのまま使用できます。
+
 ### 要件
 
 OG 画像を生成するには以下の要件が必要です。
@@ -216,12 +222,30 @@ return new Response(data, {
 
 ::: picture size=883x252 description="Lighthouse のスコアが全て 100 点" src="/public/contents/entry/image-processing-in-workers/ogp.jpeg" :::
 
+## Performance
+
+キャッシュがない時は 500ms ~ 700ms 程で表示されます。キャッシュがある時は 200ms 程で表示されます。
+
+## メリットと課題
+
+OGP 生成の方法としては Headless browser で生成する方法と node-canvas で生成する方法があります。
+これらとの Performance の比較はできていませんが、以下の点で有利な点があります。
+
+- wasm を動かせればどこでも動く
+- スタイル周りを CSS like な API で調整できる
+
+一方で課題もあります。
+
+- まだまだスタイルできる幅が狭い
+- CSS like な API を提供していますがブラウザとの互換性を完全に実現できているわけではない
+
 ## まとめ
 
 初めて Cloudflare Workers を使ってみましたが簡単に利用できました。  
 開発環境も考慮されており、ローカルで開発できるように工夫されているので体験もよかったです。
 
-ぜひ試してみてください。
+og_image_writer については、まだまだ使える API が少なくデザイン的に細かい所までこだわるのが難しかったりします。
+使いたい機能のリクエストなどあれば[issue](https://github.com/keiya01/og_image_writer/issues)までお願いします。
 
 **余談**  
 実は OG 画像の生成以外にも Squoosh を動かそうとしてみたのですが、まだ対応しておらず実装できませんでした。
