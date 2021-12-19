@@ -3,7 +3,7 @@ type DefaultMeta = {
   description?: string;
 };
 
-export const getMeta = ({ title, description }: DefaultMeta) => ({
+export const getMeta = ({ title, description }: DefaultMeta = {}) => ({
   title: `${title || "blog"} - blog.keiya01.dev`,
   description:
     description ||

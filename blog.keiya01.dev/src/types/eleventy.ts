@@ -1,5 +1,6 @@
 type PageData = {
   date: string;
+  url: string;
 };
 
 type Collection = {
