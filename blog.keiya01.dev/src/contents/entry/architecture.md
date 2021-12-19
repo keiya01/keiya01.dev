@@ -103,9 +103,9 @@ export const title = style({
 基本的には esbuild で各ページごとのバンドルを作成し、[11ty の layout](https://www.11ty.dev/docs/layouts/)としてビルド結果のファイルを指定する形になります。  
 dist にあるバンドルを[addLayoutAlias](https://www.11ty.dev/docs/layouts/#layout-aliasing)を使って使って自然な形で layout を指定できるように alias を設定します。
 
-vanilla-extract で生成された css も特に意識せずに自動で layout ごとに読み込んで欲しいです。  
+vanilla-extract で生成された css も意識せずに自動で layout ごと読み込んで欲しいです。  
 また css ファイルには hash を含めてキャッシュを効率化したいので、esbuild から manifest.json を生成します。  
-manifest.json からビルド結果の css ファイルを取得し、layout ごとに default で読み込むようにします。
+manifest.json からビルド結果の css ファイルを取得し、layout ごと default で読み込むようにします。
 
 JavaScript を使って動的なコンポーネントを作りたい場合は WebComponents を使います。また計測スクリプトや広告なども別で定義する仕組みがあります。
 
