@@ -105,7 +105,7 @@ dist にあるバンドルを[addLayoutAlias](https://www.11ty.dev/docs/layouts/
 
 vanilla-extract で生成された css も特に意識せずに自動で layout ごとに読み込んで欲しいです。  
 また css ファイルには hash を含めてキャッシュを効率化したいので、esbuild から manifest.json を生成します。  
-このファイルをもとにビルド結果の css ファイルを取得し、layout ごとに default で読み込むようにします。
+manifest.json からビルド結果の css ファイルを取得し、layout ごとに default で読み込むようにします。
 
 JavaScript を使って動的なコンポーネントを作りたい場合は WebComponents を使います。また計測スクリプトや広告なども別で定義する仕組みがあります。
 
