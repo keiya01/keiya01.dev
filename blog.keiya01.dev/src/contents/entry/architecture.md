@@ -77,8 +77,6 @@ export const render = ({
 };
 ```
 
-11ty は本来、TypeScript では動かないので、esbuild でビルドしたスクリプトを 11ty に渡しています。
-
 スタイリングは[vanilla-extract](https://vanilla-extract.style/)を使用しており型安全にスタイルを適用しています。
 
 ```ts
@@ -101,6 +99,14 @@ export const title = style({
 
 `theme.css`で各スタイルを CSS variables として定義しています。これによりダークモードとの切り替えも簡単にできました。
 
+11ty は TypeScript や vanilla-extract をサポートしていないので、自分でいい感じにする必要があります。  
+基本的には esbuild で各ページごとのバンドルを作成し、[11ty の layout](https://www.11ty.dev/docs/layouts/)としてビルド結果のファイルを指定する形になります。  
+dist にあるバンドルを[addLayoutAlias](https://www.11ty.dev/docs/layouts/#layout-aliasing)を使って使って自然な形で layout を指定できるように alias を設定します。
+
+vanilla-extract で生成された css も特に意識せずに自動で layout ごとに読み込んで欲しいです。  
+また css ファイルには hash を含めてキャッシュを効率化したいので、esbuild から manifest.json を生成します。  
+このファイルをもとにビルド結果の css ファイルを取得し、layout ごとに default で読み込むようにします。
+
 JavaScript を使って動的なコンポーネントを作りたい場合は WebComponents を使います。また計測スクリプトや広告なども別で定義する仕組みがあります。
 
 スクリプトは global なバンドルと各ページごとのバンドルに分けて作られます。
@@ -117,6 +123,8 @@ import * from "../features/webVitals.ts";
 ```
 
 esbuild に各ページのエントリーポイントを指定してそれぞれのページごとにバンドルします。
+
+JavaScript のバンドルもファイル名に hash を含めたいので manifest.json から hash 値付きのファイル名を取得し、ページごとに自動で読み込むようにしています。
 
 ## インフラ周り
 
