@@ -1,6 +1,7 @@
 import { html } from "common-tags";
 import { ORIGIN, WORKER_ORIGIN } from "../../constants/origin";
 import { PROFILE_TWITTER_URL } from "../../constants/profile";
+import { getMeta } from "../../helpers/metaHelper";
 import {
   loadPageScript,
   loadPublicResource,
@@ -75,8 +76,6 @@ const getJsonLD = (
         url: ORIGIN,
       };
 
-const setTitle = (title: string) => `${title} - blog.keiya01.dev`;
-
 export const render = async function (
   this: EleventyShortCode,
   {
@@ -86,7 +85,6 @@ export const render = async function (
     publics,
     description,
     entryId,
-    ogImageAlt,
     page,
     modified,
     renderData,
@@ -98,19 +96,17 @@ export const render = async function (
 
   const isEntry = layout === "blog/entry";
 
-  const defaultTitle = "blog";
-  const defaultDescription =
-    "Web標準やJavaScriptの話題を中心に書いていこうかなと思っています🕸";
+  const meta = getMeta({
+    title: renderData?.title || title,
+    description,
+  });
 
   return html`<!DOCTYPE html>
     <html lang="ja">
       <head>
-        <title>${setTitle(renderData?.title || title || defaultTitle)}</title>
+        <title>${meta.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="${description || defaultDescription}"
-        />
+        <meta name="description" content="${meta.description}" />
         <meta name="color-scheme" content="dark light" />
 
         <!-- === OGP meta === -->
@@ -119,27 +115,17 @@ export const render = async function (
           name="og:url"
           content="${isEntry ? `${ORIGIN}/entry/${entryId}` : ""}"
         />
-        <meta
-          name="og:title"
-          content="${setTitle(renderData?.title || title || defaultTitle)}"
-        />
-        <meta
-          name="og:description"
-          content="${description || defaultDescription}"
-        />
+        <meta name="og:title" content="${meta.title}" />
+        <meta name="og:description" content="${meta.description}" />
         <meta
           property="og:image"
-          content="${WORKER_ORIGIN}/public/ogp/${entryId}.jpeg"
+          content="${entryId
+            ? `${WORKER_ORIGIN}/public/ogp/${entryId}.jpeg`
+            : ""}"
         />
-        <meta
-          property="og:image:alt"
-          content="${isEntry ? title : ogImageAlt || defaultTitle}"
-        />
+        <meta property="og:image:alt" content="${entryId ? title : ""}" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="${setTitle(renderData?.title || title || defaultTitle)}"
-        />
+        <meta name="twitter:title" content="${meta.title}" />
 
         <!-- Google Search Console -->
         <meta
@@ -151,8 +137,8 @@ export const render = async function (
         <script type="application/ld+json">
           ${JSON.stringify(
             getJsonLD(isEntry, {
-              title: setTitle(renderData?.title || title || defaultTitle),
-              description: description || defaultDescription,
+              title: meta.title,
+              description: meta.description,
               publishedAt: page.date,
               modifiedAt: modified,
               entryId,
