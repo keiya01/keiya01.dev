@@ -36,15 +36,19 @@ export const render = ({ collections, tag }: EleventyProps): string => {
     </aside>
     <main>
       <ul class="${style.list}">
-        ${entries.map((entry) =>
-          ListItem({
-            date: entry.data.page.date,
-            description: entry.data.description,
-            title: entry.data.title,
-            url: entry.url,
-            tags: entry.data.tags,
-          })
-        )}
+        ${entries
+          .sort((a, b) =>
+            Date.parse(a.data.page.date) < Date.parse(b.data.page.date) ? 1 : -1
+          )
+          .map((entry) =>
+            ListItem({
+              date: entry.data.page.date,
+              description: entry.data.description,
+              title: entry.data.title,
+              url: entry.url,
+              tags: entry.data.tags,
+            })
+          )}
       </ul>
     </main>
   `;
