@@ -24,7 +24,7 @@ export const render = ({ collections }: EleventyProps): string => {
         title: entry.data.title || "",
         description: entry.data.description || "",
         date: entry.data.page.date,
-        url: entry.data.page.url,
+        url: `${ORIGIN}${entry.data.page.url}`,
       })
     );
 
