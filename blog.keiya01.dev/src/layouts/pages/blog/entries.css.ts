@@ -34,6 +34,7 @@ export const profileName = style({
   textDecoration: "none",
   boxShadow: `0 1px 0 0 currentColor`,
   fontSize: 16,
+  color: vars.color_base,
   ":hover": {
     color: vars.color_link,
   },
