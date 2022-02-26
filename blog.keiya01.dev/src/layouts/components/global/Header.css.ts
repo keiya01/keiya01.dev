@@ -14,6 +14,7 @@ export const header = style({
   left: 0,
   boxSizing: "border-box",
   padding: "0 20px",
+  zIndex: 999,
 });
 
 export const nav = style({

@@ -16,7 +16,6 @@ export const adFragment = style({
   position: "absolute",
   top: 0,
   left: 0,
-  zIndex: 999,
   height: "100%",
   fontSize: 18,
   color: vars.color_base,
