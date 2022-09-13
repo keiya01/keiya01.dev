@@ -154,6 +154,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@openameba/spindle-theme-switch@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@openameba/spindle-theme-switch/-/spindle-theme-switch-0.2.2.tgz#e99e2d0f8e8af3d46b3574c4825c31dc5c88c9c3"
+  integrity sha512-GB5EgQBnOveSY5K8skmLH+FW0bGmaNQdFfTvajecnQBkKYaDfvHVSCIrMMBCQGnwHpWp7+U3jDaS1onJz2Pq5g==
+  dependencies:
+    dark-mode-toggle "^0.14.0"
+
 "@squoosh/lib@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@squoosh/lib/-/lib-0.4.0.tgz#31d18cb082c69e404589e2e281414d10f91e1668"
@@ -1472,6 +1479,11 @@ csstype@^3.0.7:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
   integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
+
+dark-mode-toggle@^0.14.0:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/dark-mode-toggle/-/dark-mode-toggle-0.14.2.tgz#77ab6d8e8b7e1505d8d06192f0d1d5cb187e7787"
+  integrity sha512-VsFLzTO9lA7Pfbylrd6JjRlJkFHTOz6LwoXSeJQKmc3xkLffkyUOzB/R8tDDxXTj3duyaBeLLzqARjiOmV3LNA==
 
 date-time@^0.1.1:
   version "0.1.1"
