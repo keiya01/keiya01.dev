@@ -50,9 +50,8 @@ export const Header = ({
           </li>
           <li class="${style.item} ${style.schemeButton}">
             <color-scheme-button
-              aria-disabled="true"
-              icon-size="24"
-              label="テーマを変更する"
+              appearance="switch"
+              legend="テーマを切り替える"
             ></color-scheme-button>
           </li>
         </ul>
