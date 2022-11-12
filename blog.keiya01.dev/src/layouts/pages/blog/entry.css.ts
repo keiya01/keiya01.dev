@@ -31,10 +31,10 @@ globalStyle(`${content} > pre`, {
   overflow: "auto",
   marginTop: 45,
 });
-globalStyle(`${content} > :is(h2, h3, p, span, li) > code`, {
+globalStyle(`${content} > :is(h2, h3, p, span, li, a) > code`, {
   borderRadius: 3,
   padding: "1px 4px",
-  margin: "0 2px",
+  margin: "0 4px",
   color: vars.color_code,
 });
 globalStyle(`${content} > ul`, {
@@ -60,4 +60,7 @@ globalStyle(`${content} > p img`, {
   border: `1px solid ${vars.border_boundary_color}`,
   borderRadius: 10,
   margin: "0 auto",
+});
+globalStyle(`${content} > :is(p, span, li) > a`, {
+  margin: "0 4px",
 });
