@@ -92,3 +92,5 @@ winit では各 OS からのイベントを以下のように管理していま�
   - [android-activity](https://github.com/rib/android-activity) が使われています
 
 Window マネージャーから受け取ったイベントを OpenGL の位置情報と照らし合わせることである要素に対する click イベントを実現できます。
+
+イベントだけではなく OS 固有の window タイトルであったり、menu などのハンドリングも上記のディスプレイサーバー周りが担っています。
