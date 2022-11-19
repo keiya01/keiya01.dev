@@ -31,7 +31,7 @@ globalStyle(`${content} > pre`, {
   overflow: "auto",
   marginTop: 45,
 });
-globalStyle(`${content} > :is(h2, h3, p, span, li, a) > code`, {
+globalStyle(`${content} > :is(h2, h3, p, span, ul, a) code`, {
   borderRadius: 3,
   padding: "1px 4px",
   margin: "0 4px",
@@ -61,6 +61,6 @@ globalStyle(`${content} > p img`, {
   borderRadius: 10,
   margin: "0 auto",
 });
-globalStyle(`${content} > :is(p, span, li) > a`, {
+globalStyle(`${content} a`, {
   margin: "0 4px",
 });
