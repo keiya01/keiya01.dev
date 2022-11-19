@@ -36,6 +36,7 @@ globalStyle(`${content} > :is(h2, h3, p, span, ul, a) code`, {
   padding: "1px 4px",
   margin: "0 4px",
   color: vars.color_code,
+  overflow-wrap: "break-word",
 });
 globalStyle(`${content} > ul`, {
   marginTop: 45,
