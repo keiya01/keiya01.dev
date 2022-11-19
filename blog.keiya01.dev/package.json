@@ -17,7 +17,7 @@
     "lint:tsc": "tsc --noEmit",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint --ext .ts src",
-    "lint:text": "textlint **/*.md",
+    "disabled:lint:text": "textlint **/*.md",
     "fix": "run-s fix:*",
     "fix:prettier": "prettier -w .",
     "fix:eslint": "yarn lint:eslint --fix",
