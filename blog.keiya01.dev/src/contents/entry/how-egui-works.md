@@ -271,8 +271,6 @@ Next, [`integration.egui_ctx.tessellate()`](https://github.com/emilk/egui/blob/8
 This convert [`ClippedShape`](https://github.com/emilk/egui/blob/041f2e64bac778c9095fbf4316dc1f7c7bceb670/crates/epaint/src/lib.rs#L92-L98) into [`ClippedPrimitive`](https://github.com/emilk/egui/blob/041f2e64bac778c9095fbf4316dc1f7c7bceb670/crates/epaint/src/lib.rs#L104-L111). `ClippedShape` is created in the layout phase.
 The `tessellation` means construct rect by triangle. `egui` is using `OpenGL`. `OpenGL` is drawing the element by triangle, so it needs to draw the element by using triangle. That is, to draw an element by triangle, tessellation is used.
 
-BTW, egui is using only OpenGL for drawing, and it is not using GPU([see details in here](https://github.com/emilk/egui/issues/1129)).
-
 After tessellating, [`painter.paint_and_update_textures()`](https://github.com/emilk/egui/blob/041f2e64bac778c9095fbf4316dc1f7c7bceb670/crates/eframe/src/native/run.rs#L362) is called. In [`painter.paint_and_update_textures()`](https://github.com/emilk/egui/blob/041f2e64bac778c9095fbf4316dc1f7c7bceb670/crates/egui_glow/src/painter.rs#L316), rect is drawn by [the `draw_elements` method of the OpenGL](https://github.com/emilk/egui/blob/041f2e64bac778c9095fbf4316dc1f7c7bceb670/crates/egui_glow/src/painter.rs#L476). Then [`swap_buffers()`](https://github.com/emilk/egui/blob/041f2e64bac778c9095fbf4316dc1f7c7bceb670/crates/eframe/src/native/run.rs#L373) is called for swapping double buffering.
 
 Finally, the rect is displayed on the window!
@@ -280,5 +278,5 @@ Finally, the rect is displayed on the window!
 ## Conclusion
 
 egui is really great project. It is implemented all of features for drawing by full scratch.
-But currently egui is not supporting GPU rendering and only supporting OpenGL.
+Currently, egui is only supporting OpenGL for drawing, but OpenGL is deprecated on macos. I will try to research how to handle the problem.
 To learn more painting system, I think I will read [the webrender](https://github.com/servo/webrender) or [the skia](https://github.com/google/skia).
