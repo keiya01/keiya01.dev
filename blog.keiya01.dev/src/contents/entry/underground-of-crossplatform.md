@@ -74,6 +74,32 @@ pub fn create_display(
 }
 ```
 
+## それ以外の Platform に依存する Graphic 技術
+
+Vulkan は大きく言えば OpenGL の設計の失敗部分であったり、より GPU を効率的に扱えるように改善するために作られた API です。
+OpenGL が高度に抽象化された API であるのに対して Vulkan はより低レイヤーな API を備えています。
+multi-thread での処理も OpenGL と比べると楽に実現できる。
+
+macOS(Apple の Platform)では OpenGL を非推奨としており、代わりに metal が定義されています。
+metal は Vulkan のようなより低いレイヤーの API を提供しています。
+
+構造的な話は[OpenGL と Metal/Vulkan ってなにがちがうの? - zenn](https://zenn.dev/n0mimono/articles/0b1c1b5f2a2549)を見ると良さそうです。
+
+## Graphic ライブラリ
+
+通常、GUI を開発するときには直接 OpenGL や Vulkan を使わずに、抽象化されたライブラリを使うのが一般的です。
+(今回はゲームの話は除いてアプリケーションについて記述します。)
+
+以下のライブラリがよく使われていそうです。
+
+- [Skia](https://github.com/google/skia) ... Chrome、Flutter で使われている。Google が開発している。
+- [WebRender](https://github.com/servo/webrender) ... Firefox で使われている。Mozilla が開発している。
+
+Skia は Vulkan や Metal、DirectX などのローレベルな API をサポートしている一方で、WebRender は現状、OpenGL のみをサポートしているようです。
+issue にはローレベルな API をサポートする提案があったがリソースが足りなくて諦めていそうです。
+https://github.com/servo/webrender/issues/407
+https://github.com/servo/webrender/issues/3453
+
 ## Window マネジメント
 
 OpenGL で描画した矩形はイベントなどそのまま受け取れないのでディスプレイサーバーから受け取る必要があります。

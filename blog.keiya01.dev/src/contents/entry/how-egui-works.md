@@ -278,5 +278,5 @@ Finally, the rect is displayed on the window!
 ## Conclusion
 
 egui is really great project. It is implemented all of features for drawing by full scratch.
-Currently, egui is only supporting OpenGL for drawing, but OpenGL is deprecated on macos. I will try to research how to handle the problem.
+Currently, egui is also only supporting [wgpu](https://github.com/gfx-rs/wgpu) for drawing with low level API. It will be used for more performant case.
 To learn more painting system, I think I will read [the webrender](https://github.com/servo/webrender) or [the skia](https://github.com/google/skia).
