@@ -100,6 +100,46 @@ issue にはローレベルな API をサポートする提案があったがリ
 [https://github.com/servo/webrender/issues/407](https://github.com/servo/webrender/issues/407)
 [https://github.com/servo/webrender/issues/3453](https://github.com/servo/webrender/issues/3453)
 
+## 実行モード
+
+GUI には大きく分けて 2 つの実行モードがあります。
+
+1 つは immediate mode です。
+これは Click イベントなどの参照を持たずに即時に実行するようなモードです。
+イメージとしては以下のような感じです。
+
+```ts
+// イベントが発生するたびに呼ばれる
+const update = (ui: UI, event: Event) => {
+  const buttonLabel = event.clicked ? "クリックされました" : "これはボタンです";
+  ui.button(buttonLabel);
+};
+
+render(update);
+```
+
+2 つ目は retained mode です。
+これは毎回`update`関数を呼び出すのではなく、イベントが発生したタイミングで登録しておいた Callback 関数などを実行し、Callback を通してイベントのハンドリングを行うモードです。
+
+```ts
+// 一度だけ呼ばれる
+const update = (ui: UI, event: Event) => {
+  const buttonLabel = "これはボタンです";
+  ui.button(buttonLabel).addEventListener("click", (id: UiId) => {
+    ui.getUI(id).label = "クリックされました";
+  });
+};
+
+render(update);
+```
+
+それぞれにメリット、デメリットがあります。
+
+immediate mode はイベントの Callback を管理する必要がないため実装が比較的簡単です。一方で毎回`update`関数を呼び出してレイアウト処理を行うのでレイアウトが大きいアプリケーションには向きません。例えばスクロール量の多いメディアサイトなどには向かなそうです。
+そのため多くのインタラクションが必要なゲームのようなアプリケーションに向いています。
+
+retained mode はイベントの Callback を管理する必要がありますが、UI の更新を局所的にできるのが特徴です。そのためメディアサイトのようなスクロール量の多いサイトや大きなレイアウトを持つアプリケーションに向いています。
+
 ## Window マネジメント
 
 OpenGL で描画した矩形はイベントなどそのまま受け取れないのでディスプレイサーバーから受け取る必要があります。
