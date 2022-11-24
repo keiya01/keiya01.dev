@@ -206,7 +206,7 @@ fn render(
 
 I can skip seeing about the box shadow because it is almost same with border.
 
-## Windowing
+## Rendering
 
 Next, let's dive into [the `boilerplate::main_wrapper()` function](https://github.com/servo/webrender/blob/8827e79bd44b2f8a0cfef80a5123d97cf98c65ed/examples/common/boilerplate.rs#L103).
 
