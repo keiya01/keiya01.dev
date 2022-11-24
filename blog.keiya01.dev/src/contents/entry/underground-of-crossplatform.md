@@ -97,8 +97,8 @@ metal は Vulkan のようなより低いレイヤーの API を提供してい�
 
 Skia は Vulkan や Metal、DirectX などのローレベルな API をサポートしている一方で、WebRender は現状、OpenGL のみをサポートしているようです。
 issue にはローレベルな API をサポートする提案があったがリソースが足りなくて諦めていそうです。
-[https://github.com/servo/webrender/issues/407](https://github.com/servo/webrender/issues/407)
-[https://github.com/servo/webrender/issues/3453](https://github.com/servo/webrender/issues/3453)
+[Consider using gfx-rs for rendering #407 - GitHub issue](https://github.com/servo/webrender/issues/407)
+[Is rendering using gfx-rs / Vulkan possible? #3453 - GitHub issue](https://github.com/servo/webrender/issues/3453)
 
 ## 実行モード
 
