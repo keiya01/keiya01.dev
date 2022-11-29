@@ -572,3 +572,129 @@ let _: id = msg_send![self.webview, evaluateJavaScript:NSString::new(js) complet
 3. Tauri でメッセージの`cmd`を確認し、それぞれのコマンドを実行する
 4. Webview で JavaScript の eval を通して実行結果を返却
 5. Client で callback から結果を受け取る
+
+### セキュリティ
+
+Tauri の[Isolation pattern](https://tauri.app/v1/references/architecture/inter-process-communication/isolation)ではよりセキュアに IPC を実現できます。
+
+Tauri が IPC を通して I/O を伴い処理を行うのも脆弱性の被害を最小限にするためです。  
+IPC は中間者攻撃や XSS などから情報を抜きとられたり意図しない操作をされる可能性を孕みます。  
+そのため Tauri の Isolation pattern では IPC の操作を iframe 経由に限定し、送るデータを暗号化することで信頼性を担保しています。
+
+実際にコードを見ていきます。
+
+以下のように iframe を作成します。
+
+```js
+window.addEventListener("DOMContentLoaded", () => {
+  if (window.location.origin.startsWith(__TEMPLATE_origin__)) {
+    let style = document.createElement("style");
+    style.textContent = __TEMPLATE_style__;
+    document.head.append(style);
+
+    let iframe = document.createElement("iframe");
+    iframe.id = "__tauri_isolation__";
+    iframe.sandbox.add("allow-scripts");
+    iframe.src = __TEMPLATE_isolation_src__;
+    document.body.append(iframe);
+  }
+});
+```
+
+さらに以下のようなコードを通して iframe へ message を送ります。
+
+```js
+function sendIsolationMessage(data) {
+  // set the frame dom element if it's not been set before
+  if (!isolation.frame) {
+    const frame = document.querySelector("iframe#__tauri_isolation__");
+    if (frame.src.startsWith(isolationOrigin)) {
+      isolation.frame = frame;
+    } else {
+      console.error(
+        "Tauri IPC found an isolation iframe, but it had the wrong origin"
+      );
+    }
+  }
+
+  // ensure we have the target to send the message to
+  if (!isolation.frame || !isolation.frame.contentWindow) {
+    console.error(
+      'Tauri "Isolation" Pattern could not find the Isolation iframe window'
+    );
+    return;
+  }
+
+  isolation.frame.contentWindow.postMessage(
+    data,
+    "*" /* todo: set this to the secure origin */
+  );
+}
+```
+
+iframe 側で message イベントを待ち受けます。
+
+```js
+async function payloadHandler(event) {
+  if (!isIsolationPayload(event)) {
+    return;
+  }
+
+  let data = event.data;
+
+  if (typeof window.__TAURI_ISOLATION_HOOK__ === "function") {
+    // await even if it's not async so that we can support async ones
+    data = await window.__TAURI_ISOLATION_HOOK__(data);
+  }
+
+  const encrypted = await encrypt(data);
+  sendMessage(encrypted);
+}
+
+window.addEventListener("message", payloadHandler, false);
+```
+
+message イベントでは`payloadHandler`が呼ばれています。この関数内では`encrypt(data)`の後、`sendMessage`しています。
+
+`encrypt`関数の内部は以下のようになっています。
+
+```js
+/**
+ * @type {Uint8Array} - Injected by Tauri during runtime
+ */
+const aesGcmKeyRaw = new Uint8Array(__TEMPLATE_runtime_aes_gcm_key__);
+
+/**
+ * @type {CryptoKey}
+ */
+const aesGcmKey = await window.crypto.subtle.importKey(
+  "raw",
+  aesGcmKeyRaw,
+  "AES-GCM",
+  true,
+  ["encrypt"]
+);
+
+async function encrypt(data) {
+  let algorithm = Object.create(null);
+  algorithm.name = "AES-GCM";
+  algorithm.iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+  let encoder = new TextEncoder();
+  let payloadRaw = encoder.encode(JSON.stringify(data));
+
+  return window.crypto.subtle
+    .encrypt(algorithm, aesGcmKey, payloadRaw)
+    .then((payload) => {
+      let result = Object.create(null);
+      result.nonce = Array.from(new Uint8Array(algorithm.iv));
+      result.payload = Array.from(new Uint8Array(payload));
+      return result;
+    });
+}
+```
+
+暗号化には`AES-GCM`という共通鍵暗号の仕組みが使われています。
+バックエンド側で生成した鍵をあらかじめ共有しておき、その鍵を使って IPC のやりとりを行います。
+
+これでセキュアに IPC のやりとりができるようになりました。
