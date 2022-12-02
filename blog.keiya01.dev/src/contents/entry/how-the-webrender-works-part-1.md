@@ -363,3 +363,4 @@ When Renderer receives `PublishDocument` message, `renderer.render()` draws the 
 
 - [pcwalton/webrender-benefits.md](https://gist.github.com/pcwalton/33bd1049d6e3b686d59fbba76fc3575a)
 - [WebRender vs Layers - MozillaWiki](https://wiki.mozilla.org/Gecko:Overview#WebRender_vs_Layers)
+- [WebRender capture infrastructure - kvark's dev blog](http://kvark.github.io/webrender/debug/ron/2018/01/23/wr-capture-infra.html)
