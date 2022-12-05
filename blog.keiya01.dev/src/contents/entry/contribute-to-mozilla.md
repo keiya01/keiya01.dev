@@ -44,8 +44,8 @@ Mercurial は git のようなツールです。git と同じようにコード�
 1. BugZilla で issue を立てます
 2. コードを編集します
 3. `hg commit -m "Bug <revision_id> - <commit message> r?<#group-name or nickname>"` でコミットします
-  1. [Group 一覧](https://firefox-source-docs.mozilla.org/contributing/reviews.html)
-4. `moz-phab` 単体を実行するとコミットメッセージのチェックなどをおこなってくれます
-5. `moz-phab submit <revision>` でコードを送ります
+4. [Group 一覧](https://firefox-source-docs.mozilla.org/contributing/reviews.html)
+5. `moz-phab` 単体を実行するとコミットメッセージのチェックなどをおこなってくれます
+6. `moz-phab submit <revision>` でコードを送ります
 
 詳細は[Firefox Contributors’ Quick Reference](https://firefox-source-docs.mozilla.org/contributing/contribution_quickref.html)がわかりやすいです。
