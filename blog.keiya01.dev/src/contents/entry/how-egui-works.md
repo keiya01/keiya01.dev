@@ -1,7 +1,7 @@
 ---
 layout: blog/entry
-title: How the egui works
-description: I researched how the egui works.
+title: How egui works
+description: I researched how egui works.
 date: 2022-11-19
 modified: 2022-11-19
 tags:
@@ -14,7 +14,7 @@ entryId: how-egui-works
 ## What is this?
 
 I will read the code of [egui](https://github.com/emilk/egui), and I will describe how it works.
-The egui is GUI library for Rust.
+egui is GUI library for Rust.
 
 This is created with almost full scratch. This is great and this is useful for understanding how the GUI works.
 
@@ -48,10 +48,10 @@ On the other hand, the retained mode construct layout when the stored layout get
 
 See more detail of immediate mode in [the documentation of egui](https://github.com/emilk/egui#why-immediate-mode).
 
-## Read the example of the egui
+## Read example of egui
 
-First, we need to known how the egui works.
-So let's try to see example in the egui.
+First, we need to known how egui works.
+So let's try to see example in egui.
 
 I tried to run [hello_world example](https://github.com/emilk/egui/tree/master/examples/hello_world). This is so simple example.
 
@@ -69,7 +69,7 @@ fn main() {
 ```
 
 `eframe::run_native` is method for running `MyApp` on native window.
-The egui can run app on everywhere like native, browser.
+egui can run app on everywhere like native, browser.
 
 `eframe::run_native` also has role for painting the constructed UI.
 We will see `eframe::run_native` later.
@@ -106,7 +106,7 @@ This code define the implementation of `MyApp` for satisfying `eframe::App`.
 The `MyApp::update` method is called each time that the UI needs repainting.
 
 In `MyApp::update` method, `egui::CentralPanel::default().show()` method is called.
-The egui has some `Panel` that includes `egui::CentralPanel`.
+egui has some `Panel` that includes `egui::CentralPanel`.
 the following `Panel` is defined.
 
 - `CentralPanel`
@@ -127,7 +127,7 @@ And App paint the UI after processing the above steps in `eframe::run_native`.
 
 ### Layout
 
-We could learn the overview of the egui works, so we can dive into the code more deeply.
+We could learn the overview of egui works, so we can dive into the code more deeply.
 
 First, I will read the detail of `egui::CentralPanel::default().show()` method.
 
@@ -198,9 +198,9 @@ In egui, the `App::update` is called when event is sent, and the UI's state is c
 
 ### Paint
 
-Next, we will discuss about the painting flow. In the egui, [`eframe::run_native()`](https://github.com/keiya01/egui/blob/7b8c17042c56726facd01fbf2735a67341a34470/examples/hello_world/src/main.rs#L7) method is used for painting for native app.
+Next, we will discuss about the painting flow. In egui, [`eframe::run_native()`](https://github.com/keiya01/egui/blob/7b8c17042c56726facd01fbf2735a67341a34470/examples/hello_world/src/main.rs#L7) method is used for painting for native app.
 `eframe::run_native()` is defined in [here](https://github.com/emilk/egui/blob/76d0cf50349d1e5e70b86a3e9678fe6b8ad3e0d7/crates/eframe/src/lib.rs#L168), this will select the painter.
-In the egui, the following painters are used for each target.
+In egui, the following painters are used for each target.
 
 - [glow](https://github.com/grovesNL/glow) ... This is used as painting backend. This works everywhere as wasm.
 - [wgpu](https://github.com/gfx-rs/wgpu) ... This is used as painting backend and added for compatibility described in [Add egui_wgpu crate](https://github.com/emilk/egui/pull/1564). This works everywhere as wasm.

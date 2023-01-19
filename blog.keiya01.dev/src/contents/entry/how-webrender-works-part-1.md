@@ -1,7 +1,7 @@
 ---
 layout: blog/entry
-title: How the webrender works - part 1
-description: I researched how the webrender works.
+title: How webrender works - part 1
+description: I researched how webrender works.
 date: 2022-11-24
 modified: 2022-11-24
 tags:
@@ -9,15 +9,15 @@ tags:
   - gui
   - webrender
   - servo
-entryId: how-the-webrender-works-part-1
+entryId: how-webrender-works-part-1
 ---
 
 ## What is this?
 
 I will read the code of [webrender](https://github.com/servo/webrender), and I will describe how it works.
-The webrender is painting engine written in Rust. It is used in Firefox.
+webrender is painting engine written in Rust. It is used in Firefox.
 
-In this part, I will read the example code of webrender, and understand the overall of how the webrender works.
+In this part, I will read the example code of webrender, and understand the overall of how webrender works.
 I will research more detail of implementation in next part.
 
 If you want to learn how the gui works, you can see [How the egui works](https://blog.keiya01.dev/entry/how-egui-works).
