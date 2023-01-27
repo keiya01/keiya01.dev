@@ -3,7 +3,6 @@ import { PROFILE_TWITTER_URL } from "../../../constants/profile";
 
 import { EleventyData, EleventyProps } from "../../../types/eleventy";
 import { ListItem } from "../../components/entry/ListItem";
-import { GoogleAd } from "../../components/global/ad/GoogleAd";
 import { Thumbnail } from "../../components/global/Thumbnail";
 
 import * as style from "./entries.css";
@@ -30,9 +29,6 @@ export const render = ({ collections, tag }: EleventyProps): string => {
           </a>
         </div>
       </div>
-    </aside>
-    <aside>
-      ${GoogleAd({ slot: "4614145857", format: "horizontal", height: 120 })}
     </aside>
     <main>
       <ul class="${style.list}">

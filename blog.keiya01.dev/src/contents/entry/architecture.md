@@ -107,7 +107,7 @@ vanilla-extract で生成された css も意識せずに自動で layout ごと
 また css ファイルには hash を含めてキャッシュを効率化したいので、esbuild から manifest.json を生成します。  
 manifest.json からビルド結果の css ファイルを取得し、layout ごと default で読み込むようにします。
 
-JavaScript を使って動的なコンポーネントを作りたい場合は WebComponents を使います。また計測スクリプトや広告なども別で定義する仕組みがあります。
+JavaScript を使って動的なコンポーネントを作りたい場合は WebComponents を使います。また計測スクリプトなども別で定義する仕組みがあります。
 
 スクリプトは global なバンドルと各ページごとのバンドルに分けて作られます。
 
@@ -137,14 +137,6 @@ JavaScript のバンドルもファイル名に hash を含めたいので manif
 
 Cloudflare Workers を使って OG 画像を生成しています。
 詳しくは[Cloudflare Workers で OG 画像を生成する](https://blog.keiya01.dev/entry/og-image-in-workers/)を参照してください。
-
-## 広告
-
-今回はトップページに Google AdSense を導入してみました。意図としては広告も Web 技術の 1 つだと思っており、私自身あまり詳しくないので運用を通して仕組みやセキュリティの動向を知りたいというのがあります。
-
-また、今は広告を 1 つしか出していませんが、パフォーマンスやユーザー体験的な部分も考えてみたいので、うまいこと共存させる方法が思いつけば広告を増やしていきたいです。
-
-補足: 12/19 現在では記事の数が少なすぎて審査が通っていないです 😀。
 
 ## Performance
 

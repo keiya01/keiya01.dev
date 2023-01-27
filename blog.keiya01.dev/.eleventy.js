@@ -154,7 +154,6 @@ module.exports = function (config) {
     "public/sw.js": "sw.js",
     "public/manifest.json": "manifest.json",
     "public/_headers": "_headers",
-    "public/ads.txt": "ads.txt",
   });
 
   config.setBrowserSyncConfig({
