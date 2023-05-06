@@ -1,6 +1,6 @@
 ---
 layout: blog/entry
-title: Read code of Bevy 
+title: Read code of Bevy
 description: This is a note that summarize the code I read.
 date: 2023-05-01
 modified: 2023-05-01
