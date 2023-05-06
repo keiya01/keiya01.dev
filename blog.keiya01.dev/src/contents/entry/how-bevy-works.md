@@ -306,7 +306,7 @@ fn build(&self, app: &mut App) {
 
 In here, `main_schedule` and `fixed_update_loop_schedule` are instantiated by `Schedule` struct.  
 Then, these are set executor as `ExecutorKind::SingleThreaded`.  
-This means these schedules are executed on single thread.  
+This means these schedules are executed on single thread.
 
 What is schedule?  
 Schedule is kind of `HashMap`. It stores metadata like `system`. These will be invoked at scheduled time.
@@ -365,7 +365,7 @@ That is, this defines orders for scheduling.
 
 ### Main::run_main
 
-Next, `app.add_system(Main, Main::run_main)` method is invoked. 
+Next, `app.add_system(Main, Main::run_main)` method is invoked.
 
 `Main::run_main` is defined as following.
 
@@ -465,7 +465,6 @@ pub fn spawn<'a, T: Bundle>(&'a mut self, bundle: T) -> EntityCommands<'w, 's, '
 ```
 
 `self.spawn_empty()` creates new `Entity`.
-
 
 ```rust
 pub fn spawn_empty<'a>(&'a mut self) -> EntityCommands<'w, 's, 'a> {
@@ -681,7 +680,7 @@ fn set_shader(&mut self, handle: &Handle<Shader>, shader: &Shader) {
 ```
 
 A layout is retrieved from waiting pipeline in `PipelineCache::process_render_pipeline` or `PipelineCache::process_compute_pipeline` that is invoked in `PipelineCache::process_pipeline_queue_system`. Layout means [a bind group layout](https://docs.rs/wgpu/latest/wgpu/struct.BindGroupLayout.html) provided by wgpu.
-A pipeline is created and cached based on layout in `PipelineCache::process_render_pipeline` or `PipelineCache::process_compute_pipeline`.  
+A pipeline is created and cached based on layout in `PipelineCache::process_render_pipeline` or `PipelineCache::process_compute_pipeline`.
 
 ```rust
 fn process_render_pipeline(
