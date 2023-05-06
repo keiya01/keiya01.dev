@@ -1,7 +1,7 @@
 ---
 layout: blog/entry
-title: How webrender works - part 1
-description: I researched how webrender works.
+title: Read code of webrender - part 1
+description: This is a note that summarize the code I read.
 date: 2022-11-24
 modified: 2022-11-24
 tags:
@@ -9,7 +9,8 @@ tags:
   - gui
   - webrender
   - servo
-entryId: how-webrender-works-part-1
+  - Code Reading
+entryId: read-code-of-webrender-part-1
 ---
 
 ## What is this?

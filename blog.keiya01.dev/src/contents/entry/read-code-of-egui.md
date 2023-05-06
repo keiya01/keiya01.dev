@@ -1,14 +1,15 @@
 ---
 layout: blog/entry
-title: How egui works
-description: I researched how egui works.
+title: Read code of egui
+description: This is a note that summarize the code I read.
 date: 2022-11-19
 modified: 2022-11-19
 tags:
   - layout engine
   - gui
   - egui
-entryId: how-egui-works
+  - Code Reading
+entryId: read-code-of-egui
 ---
 
 ## What is this?
