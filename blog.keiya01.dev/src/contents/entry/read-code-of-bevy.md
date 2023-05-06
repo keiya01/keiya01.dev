@@ -1,14 +1,15 @@
 ---
 layout: blog/entry
-title: How bevy works
-description: Investigated how Bevy works
+title: Read code of Bevy 
+description: This is a note that summarize the code I read.
 date: 2023-05-01
 modified: 2023-05-01
 tags:
   - Bevy
   - Rust
   - GUI
-entryId: how-bevy-works
+  - Code Reading
+entryId: read-code-of-bevy
 ---
 
 ## Overview
