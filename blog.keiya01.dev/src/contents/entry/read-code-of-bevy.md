@@ -44,7 +44,8 @@ fn main() {
 First, `App` struct provided by Bevy is initialized with `App::new()`.  
 Then, some resources like `AmbientLight`, `DirectionalLightShadowMap` are initialized.  
 Next, `DefaultPlugins` is added. It includes some functionality like window management by [winit](https://github.com/rust-windowing/winit).  
-Additionally, some `systems` are added through `App::add_systems` function. In this step, some functions are added as system, also these are related to schedule. In this example, `Startup` is added as schedule label. This means this system will be invoked at `Startup` order on schedule of Bevy.
+Additionally, some `systems` are added through `App::add_systems` function. In this step, some functions are added as system, also these are related to schedule. In this example, `Startup` is added as schedule label. This means this system will be invoked at `Startup` order on schedule of Bevy.  
+Also `Update` works similar to the `Startup` process.
 
 ## Deep dive into code
 
@@ -661,7 +662,7 @@ render_app
 
 ### Manages and caches pipeline
 
-As you can see, `PipelineCache` has the responsibility.  
+As you can see, `PipelineCache` has the responsibility for caching pipelines to render a frame.  
 `PipelineCache` caches the following things.
 
 - Shaders
