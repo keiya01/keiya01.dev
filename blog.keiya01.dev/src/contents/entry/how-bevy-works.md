@@ -19,7 +19,7 @@ wgpu is a library that provides abstracted API for GPU API. Also it follows Web 
 
 ## Overall of Bevy
 
-I will describe overall based on [load_gltf example](https://github.com/bevyengine/bevy/blob/ee697f820c0b164cf2825b9c8e932fc8cee24a2c/examples/3d/load_gltf.rs) in here.
+First, I will describe the overall of Bevy through [load_gltf example](https://github.com/bevyengine/bevy/blob/ee697f820c0b164cf2825b9c8e932fc8cee24a2c/examples/3d/load_gltf.rs).
 
 The entry point is below.
 
@@ -40,10 +40,10 @@ fn main() {
 
 ### How it works?
 
-First, `App` struct that is provided by Bevy is initialized with `App::new()`.  
+First, `App` struct provided by Bevy is initialized with `App::new()`.  
 Then, some resources like `AmbientLight`, `DirectionalLightShadowMap` are initialized.  
 Next, `DefaultPlugins` is added. It includes some functionality like window management by [winit](https://github.com/rust-windowing/winit).  
-Additionally, some systems are added. In this step, some functions are added as system, also these are relation to schedule. In this example, `Startup` is added as schedule label. This means this system will be invoked at `Startup` order in schedule of Bevy.
+Additionally, some `systems` are added through `App::add_systems` function. In this step, some functions are added as system, also these are related to schedule. In this example, `Startup` is added as schedule label. This means this system will be invoked at `Startup` order on schedule of Bevy.
 
 ## Deep dive into code
 
@@ -51,7 +51,7 @@ In this section, we will deep dive into the example code.
 
 ### Initialize App struct
 
-`App::new()` is define like the following.
+`App::new()` is defined like the following.
 
 ```rust
 /// Creates a new [`App`] with some default structure to enable core engine features.
@@ -104,6 +104,8 @@ pub fn empty() -> App {
 }
 ```
 
+In `App::empty` function, `World` struct will be initialized.
+
 ### Initialize World struct
 
 `World::new()` works like the following.
@@ -145,7 +147,7 @@ impl Default for World {
 }
 ```
 
-Then `world.init_resource::<Schedules>();` is following.
+Then `world.init_resource::<Schedules>();` will be invoked after initializing `World` struct.
 
 ```rust
 /// Initializes a new resource and returns the [`ComponentId`] created for it.
@@ -192,6 +194,8 @@ struct Schedule {
 }
 ```
 
+Then the resource will be inserted to world.
+
 ### MainSchedulePlugin
 
 Back to `App::default()` definition.
@@ -216,9 +220,8 @@ impl Default for App {
 }
 ```
 
-Then, let's look `app.add_plugin(MainSchedulePlugin);`.
-
-First, `MainSchedulePlugin` is defined like below.
+And let's look `app.add_plugin(MainSchedulePlugin);`. In here, `MainSchedulePlugin` is added.  
+`MainSchedulePlugin` is defined like below.
 
 ```rust
 /// Initializes the [`Main`] schedule, sub schedules,  and resources for a given [`App`].
@@ -240,7 +243,9 @@ impl Plugin for MainSchedulePlugin {
 }
 ```
 
-Next, let's dive into `App::add_plugin()`.
+This `build` function setup some default behavior for Bevy. But let's skip for now and look it later.
+
+Next, dive into `App::add_plugin()`.
 
 ```rust
 pub fn add_plugin<T>(&mut self, plugin: T) -> &mut Self
@@ -299,9 +304,9 @@ fn build(&self, app: &mut App) {
 }
 ```
 
-In here, `main_schedule` and `fixed_update_loop_schedule` are instantiated by `Schedule` struct.
-Then, these are set executor as `ExecutorKind::SingleThreaded`.
-This means these schedules are executed on single thread.
+In here, `main_schedule` and `fixed_update_loop_schedule` are instantiated by `Schedule` struct.  
+Then, these are set executor as `ExecutorKind::SingleThreaded`.  
+This means these schedules are executed on single thread.  
 
 What is schedule?  
 Schedule is kind of `HashMap`. It stores metadata like `system`. These will be invoked at scheduled time.
