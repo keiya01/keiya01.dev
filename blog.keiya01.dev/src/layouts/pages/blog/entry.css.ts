@@ -19,17 +19,26 @@ export const content = style({});
 globalStyle(`${content} > p`, {
   margin: "45px 0 0",
 });
-globalStyle(`${content} > :is(h2, h3) + :is(p, ul, pre, blockquote)`, {
-  marginTop: 0,
-});
-globalStyle(`${content} :is(pre[class*="language-"], code)`, {
+globalStyle(
+  `${content} > :is(h2, h3) + :is(p, ul, pre, blockquote, .MathJax)`,
+  {
+    marginTop: 0,
+  }
+);
+globalStyle(`${content} :is(pre[class*="language-"], code, .MathJax)`, {
   background: vars.background_code,
 });
-globalStyle(`${content} > pre`, {
+globalStyle(`${content} > :is(pre, .MathJax)`, {
   padding: 10,
   borderRadius: 5,
   overflow: "auto",
   marginTop: 45,
+});
+globalStyle(`${content} > .MathJax`, {
+  width: "100%",
+  display: "block",
+  textAlign: "center",
+  fontSize: 20,
 });
 globalStyle(`${content} > :is(h2, h3, p, span, ul, a) code`, {
   borderRadius: 3,

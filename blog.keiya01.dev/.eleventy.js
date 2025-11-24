@@ -130,10 +130,66 @@ You need to run \`yarn build:img\`.
   return [BLOCK_NAME, options];
 };
 
+MathJax = {
+  options: {
+    enableAssistiveMml: true,
+  },
+  loader: {
+    paths: { mathjax: "mathjax-full/es5" },
+    source: {},
+    require: require,
+    load: ["adaptors/liteDOM"],
+  },
+  tex: {
+    packages: ["base", "autoload", "require", "ams", "newcommand"],
+  },
+  startup: {
+    typeset: false,
+  },
+};
+require("mathjax-full/es5/tex-chtml");
+
+/** Usage
+ * ::: tex
+ * \int_0^1 f(x) dx
+ * :::
+ */
+const useTeX = () => {
+  const BLOCK_NAME = "tex";
+  const options = {
+    validate: (params) => {
+      return params.trim().match(new RegExp(`^${BLOCK_NAME}$`));
+    },
+    render: (tokens, idx) => {
+      // TODO: use more confidential way
+      const text = tokens[idx + 2]?.content || "";
+      const node = MathJax.tex2chtml(text, {
+        display: false,
+      });
+      const adaptor = MathJax.startup.adaptor;
+
+      // Remove unnecessary markup
+      let i = idx;
+      while (true) {
+        tokens[i].hidden = true;
+        tokens[i].children = [];
+        console.log(tokens[i], i);
+        if (tokens[i]?.type === "container_tex_close") {
+          break;
+        }
+        i++;
+      }
+
+      return text ? adaptor.outerHTML(node) : "";
+    },
+  };
+
+  return [BLOCK_NAME, options];
+};
+
 const useMarkdown = () => {
   const markdownIt = require("markdown-it");
   const anchor = require("markdown-it-anchor");
-  const container = require("markdown-it-container");
 
   const options = {
     html: true,
@@ -143,7 +199,8 @@ const useMarkdown = () => {
     .use(anchor, {
       permalink: anchor.permalink.headerLink(),
     })
-    .use(container, ...usePicture());
+    .use(require("markdown-it-container"), ...useTeX())
+    .use(require("markdown-it-container"), ...usePicture());
 };
 
 module.exports = function (config) {
